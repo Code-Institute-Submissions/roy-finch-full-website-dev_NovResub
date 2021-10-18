@@ -16,7 +16,7 @@
                 top: 0px;
                 font-family: "Segoe UI", sans-serif;
             }
-            button, a, input[type="text"] {
+            button, a, input[type="text"], input {
                 text-decoration: none;
                 border: none;
                 outline: none;
@@ -31,6 +31,14 @@
                 border-bottom: 1px solid grey;
                 display: inline-block;
             }
+            .nav-bar {
+                padding: 0px 5px 5px 5px;
+                position: absolute;
+                top: 45px;
+                left: 0px;
+                width: 100%;
+                display: inline-block;
+            }
             .inline {
                 display: inline;
             }
@@ -39,7 +47,7 @@
                 width: fit-content;
             }
             .main-content {
-                margin: 80px 40px 0 40px;
+                margin: 120px 40px 0 40px;
             }
             .center-text {
                 text-align: center;
@@ -49,9 +57,23 @@
                 padding: 2px 20px 2px 20px;
                 border-radius: 20px;
             }
+            .large-text {
+                font-size: 16px;
+                color: black;
+            }
+            .half-border {
+                border: 1px solid grey;
+                border-top: none;
+                padding: 2px 20px 2px 20px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
             .center {
-                margin: -35px auto auto auto;
+                margin: auto;
                 width: fit-content;
+            }
+            .m-t-35 {
+                margin-top: -35px;
             }
             .right {
                 position: absolute;
@@ -60,6 +82,36 @@
             }
             .search-button {
                 margin: 2px -15px 2px 2px;
+            }
+            .themed-button {
+                color: white;
+                background-color: black;
+                font-size: 22px;
+                border-radius: 20px;
+                padding: 10px;
+            }
+            .p-5 {
+                padding: 5px;
+            }
+            .m-5 {
+                margin: 5px;
+            }
+            .dropdown-container {
+                width: 100%;
+                display: none;
+                margin-top: 8px;
+                text-align: center;
+            }
+            .dropdown-container a {
+                border-radius: 20px;
+                display: block;
+                width: 80%;
+                margin-left: 6%;
+                margin-bottom: 4px;
+                border: 1px solid grey;
+            }
+            .dropdown:hover .dropdown-container {
+                display: block;
             }
         </style>
     {% endblock %}
@@ -77,14 +129,45 @@
         <div class="inline right">
             <a class="border">Accounts</a>
         </div>
-        <div class="center">
-            <form class="border" action="">
+        <div class="center m-t-35">
+            <form class="border" method="GET" action="">
                 <input type="text" name="search" placeholder="Search Bar" >
                 <button class="border search-button">
                     <span>Search</span>
                 </button>
             </form>
         </div>
+    </div>
+
+    <div class="nav-bar">
+        <form class="center half-border" method="GET" action="">
+            <input class="border large-text p-5 m-5" placeholder="What console to search for?" class="no-default filter" name="c" list="console"/>
+            <datalist id="console">
+                <option value="No Specific Console"/>
+                <option value="Nintendo 64"/>
+                <option value="NES"/>
+                <option value="SNES"/>
+            </datalist>
+            <input class="border large-text p-5 m-5" placeholder="What to search for?" class="no-default filter" name="q" list="search-for"/>
+            <datalist id="search-for">
+                <option value="Consoles"/>
+                <option value="Games"/>
+                <option value="Accessories"/>
+                <option value="Bundles"/>
+                <option value="All"/>
+            </datalist>
+            <input class="border large-text p-5 m-5" placeholder="What filter to apply?" class="no-default filter" name="f" list="filter"/>
+            <datalist id="filter">
+                <option value="A-Z"/>
+                <option value="Z-A"/>
+                <option value="Ascending Price"/>
+                <option value="Decending Price"/>
+                <option value="Rating"/>
+            </datalist>
+            <button class="border" type="submit">
+                Submit
+            </button>
+        </form>
     </div>
 
     {% if messages %}
