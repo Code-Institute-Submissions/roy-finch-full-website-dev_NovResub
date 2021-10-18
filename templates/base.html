@@ -217,10 +217,11 @@
         <br>
         <p>Basket</p>
         {% if grand_total %}
-            <p>{{ grand_total }}</p>
+            <span>{{ grand_total }}</span>
+        {% else %}
+            <span>£ 0.00</span>
         {% endif %}
     </div>
-
 
     {% block postloadjs %}
     {% endblock %}
