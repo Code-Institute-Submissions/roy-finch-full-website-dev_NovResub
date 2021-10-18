@@ -14,27 +14,49 @@
             body {
                 left: 0px;
                 top: 0px;
+                font-family: "Segoe UI", sans-serif;
+            }
+            button, a, input[type="text"] {
+                text-decoration: none;
+                border: none;
+                outline: none;
+                background: white;
             }
             .top-bar {
+                padding: 0px 5px 5px 5px;
                 position: absolute;
                 top: 0px;
                 left: 0px;
                 width: 100%;
-                border: 1px solid black;
+                border-bottom: 1px solid grey;
                 display: inline-block;
             }
             .inline {
                 display: inline;
-                width: 40%;
             }
             .logo-text {
-                letter-spacing: -2px;
+                letter-spacing: -3px;
+                width: fit-content;
             }
             .main-content {
-                margin: 120px 40px 0 40px;
+                margin: 80px 40px 0 40px;
             }
             .center-text {
                 text-align: center;
+            }
+            .border {
+                border: 1px solid grey;
+                padding: 2px 20px 2px 20px;
+                border-radius: 20px;
+            }
+            .center {
+                margin: -35px auto auto auto;
+                width: fit-content;
+            }
+            .right {
+                position: absolute;
+                margin-top: 10px;
+                right: 30px;
             }
         </style>
     {% endblock %}
@@ -46,11 +68,14 @@
 </head>
 <body>
     <div class="top-bar">
-        <div class="inline">
-            <h1 class="logo-text">Retro Exchange</h1>
+        <div class="inline left">
+            <h1 class="logo-text inline">Retro Exchange</h1>
         </div>
-        <div class="inline">
-            <form action="">
+        <div class="inline right">
+            <a class="border">Accounts</a>
+        </div>
+        <div class="center">
+            <form class="border" action="">
                 <input type="text" name="search" placeholder="Search Bar" >
                 <button>
                     <span>Search</span>
