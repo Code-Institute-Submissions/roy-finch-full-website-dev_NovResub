@@ -10,6 +10,33 @@
     {% endblock %}
 
     {% block corecss %}
+        <style>
+            body {
+                left: 0px;
+                top: 0px;
+            }
+            .top-bar {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                border: 1px solid black;
+                display: inline-block;
+            }
+            .inline {
+                display: inline;
+                width: 40%;
+            }
+            .logo-text {
+                letter-spacing: -2px;
+            }
+            .main-content {
+                margin: 120px 40px 0 40px;
+            }
+            .center-text {
+                text-align: center;
+            }
+        </style>
     {% endblock %}
 
     {% block corejs %}
@@ -18,11 +45,11 @@
     <title>Retro Exchange</title>
 </head>
 <body>
-    <div>
-        <div>
-            <h1>Retro Exchange</h1>
+    <div class="top-bar">
+        <div class="inline">
+            <h1 class="logo-text">Retro Exchange</h1>
         </div>
-        <div>
+        <div class="inline">
             <form action="">
                 <input type="text" name="search" placeholder="Search Bar" >
                 <button>
@@ -38,8 +65,10 @@
     {% block page_header %}
     {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+    <div class="main-content center-text">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     {% block postloadjs %}
     {% endblock %}
