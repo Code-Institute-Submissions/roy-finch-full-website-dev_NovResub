@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from django.db.models import Q
 from django.db.models.functions import Lower
+from basket.views import update_basket
 
 consoles = ["No Specific Console", "Nintendo 64", "NES", "SNES"]
 categories = ["All", "Consoles", "Games", "Accessories", "Bundles"]
@@ -16,6 +17,8 @@ def all_products(request):
     ids = [0, 0]
     sortkey = None
     query = ["", "", ""]
+
+    basket = request.session.get("basket", {})
 
     if request.GET:
         if "search" not in request.GET and (
@@ -73,17 +76,47 @@ def all_products(request):
         "products": products,
         "search_q": search,
         "return_num": search_num,
+        "basket_contents": basket,
         "can_display": True
     }
+
+    if request.POST:
+        if "add" in request.POST:
+            check_request(request, request.POST["add"])
+            return redirect("/products/#id"+request.POST["add"])
 
     return render(request, "products/products.html", context)
 
 
+def check_request(request, product_pk):
+    """
+    Checks whether a request is to add
+    or remove an item from the basket
+    this is done as the basket is a list, dict
+    and needs to be accessed using the function inside
+    the views.py basket/
+    """
+    if request.POST:
+        if "add" in request.POST:
+            update_basket(request, True, product_pk)
+        elif "remove" in request.POST:
+            update_basket(request, False, product_pk)
+
+
 def product_detail(request, product_pk):
+    """ This will display the page of the item that has been selected."""
+
     products = get_object_or_404(Product, pk=product_pk)
 
+    basket = request.session.get("basket", [])
+
+    if request.POST:
+        check_request(request, product_pk)
+
     context = {
-        "products": products
+        "products": products,
+        "basket_contents": basket,
+        "can_display": True
     }
 
     return render(request, "products/product.html", context)
