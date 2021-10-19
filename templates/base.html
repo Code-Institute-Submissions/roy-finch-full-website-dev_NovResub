@@ -142,6 +142,10 @@
             .m-5 {
                 margin: 5px;
             }
+            .dropdown {
+                z-index: 3;
+                width: 100px;
+            }
             .dropdown-container {
                 width: 100%;
                 display: none;
@@ -187,11 +191,21 @@
             </a>
         </div>
         <div class="inline right dropdown">
-            <a class="border">Accounts</a>
-            <div class="dropdown-container">
-                <a class="border">Accounts</a>
-                <a class="border">Accounts</a>
-            </div>
+            <a class="border">Options</a>
+            {% if request.user.is_authenticated %}
+                <div class="dropdown-container">
+                    {% if request.user.is_superuser %}
+                        <a class="border">Edit Products</a>
+                    {% endif %}
+                    <a class="border">My Account</a>
+                    <a href="{% url 'account_logout' %}" class="border">Logout</a>
+                </div>
+            {% else %}
+                <div class="dropdown-container">
+                    <a href="{% url 'account_signup' %}" class="border">Signup</a>
+                    <a href="{% url 'account_login' %}" class="border">Login</a>
+                </div>
+            {% endif %}
         </div>
         <div class="center m-t-35">
             <form class="border fit-content" method="GET" action="{% url 'products' %}">

@@ -86,9 +86,8 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                # This is used by django-allauth
+                # required by django-allauth
                 'django.template.context_processors.request',
-
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
