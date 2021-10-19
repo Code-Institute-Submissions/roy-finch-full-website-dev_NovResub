@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from products.models import Product
+from django.forms.models import model_to_dict
 
 
 def view_basket(request):
@@ -23,11 +24,14 @@ def update_basket(request, add, product_pk):
         if find_product(basket, product_pk) is not False:
             basket[find_product(basket, product_pk)]["quantity"] += 1
         else:
-            basket.append({
+            basket[len(basket)] = {
                 "pk": product_pk,
-                "product": product,
+                "product": model_to_dict(product, exclude=["price", "rating", "image"]),
+                "price": float(product.price),
+                "rating": float(product.rating),
+                "image": str(product.image),
                 "quantity": 1,
-            })
+            }
     else:
         if find_product(basket, product_pk) is not False and basket[
                 find_product(basket, product_pk)]["quantity"] > 1:

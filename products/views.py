@@ -19,6 +19,7 @@ def all_products(request):
     query = ["", "", ""]
 
     basket = request.session.get("basket", {})
+    print(basket)
 
     if request.GET:
         if "search" not in request.GET and (
@@ -108,7 +109,7 @@ def product_detail(request, product_pk):
 
     products = get_object_or_404(Product, pk=product_pk)
 
-    basket = request.session.get("basket", [])
+    basket = request.session.get("basket", {})
 
     if request.POST:
         check_request(request, product_pk)
