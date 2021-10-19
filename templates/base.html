@@ -271,7 +271,7 @@
             <img src="/media/basket.png">
             <br>
             {% if grand_total %}
-                <span><b>{{ grand_total }}</b></span>
+                <span><b>£ {{ grand_total|floatformat:2 }}</b></span>
             {% else %}
                 <span><b>£ 0.00</b></span>
             {% endif %}

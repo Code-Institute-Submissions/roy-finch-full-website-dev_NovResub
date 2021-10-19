@@ -17,18 +17,18 @@ def view_basket(request):
 
 
 def update_basket(request, add, product_pk):
-    basket = request.session.get("basket", {})
+    basket = request.session.get("basket", [])
     product = get_object_or_404(Product, pk=product_pk)
 
     if add:
         if find_product(basket, product_pk) is not False:
             basket[find_product(basket, product_pk)]["quantity"] += 1
         else:
-            basket[len(basket)] = {
+            basket.append({
                 "pk": product_pk,
                 "product": model_to_dict(product, exclude=["price", "rating", "image"]),
                 "quantity": 1,
-            }
+            })
             basket[len(basket)-1]["product"]["price"] = float(product.price)
             basket[len(basket)-1]["product"]["rating"] = float(product.rating)
             basket[len(basket)-1]["product"]["image"] = str(product.image)
@@ -57,6 +57,6 @@ def find_product(dic, pk):
     """
 
     for i in range(0, len(dic)):
-        if dic[str(i)]["pk"] == pk:
-            return str(i)
+        if dic[i]["pk"] == pk:
+            return i
     return False
