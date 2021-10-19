@@ -267,13 +267,15 @@
     <div class="half-bottom-border right bottom w-100 center-text">
         <br>
         <br>
-        <img src="/media/basket.png">
-        <br>
-        {% if grand_total %}
-            <span><b>{{ grand_total }}</b></span>
-        {% else %}
-            <span><b>£ 0.00</b></span>
-        {% endif %}
+        <a href="{% url 'basket' %}">
+            <img src="/media/basket.png">
+            <br>
+            {% if grand_total %}
+                <span><b>{{ grand_total }}</b></span>
+            {% else %}
+                <span><b>£ 0.00</b></span>
+            {% endif %}
+        </a>
         <hr>
     </div>
 
