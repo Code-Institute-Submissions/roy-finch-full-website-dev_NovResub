@@ -27,11 +27,11 @@ def update_basket(request, add, product_pk):
             basket[len(basket)] = {
                 "pk": product_pk,
                 "product": model_to_dict(product, exclude=["price", "rating", "image"]),
-                "price": float(product.price),
-                "rating": float(product.rating),
-                "image": str(product.image),
                 "quantity": 1,
             }
+            basket[len(basket)-1]["product"]["price"] = float(product.price)
+            basket[len(basket)-1]["product"]["rating"] = float(product.rating)
+            basket[len(basket)-1]["product"]["image"] = str(product.image)
     else:
         if find_product(basket, product_pk) is not False and basket[
                 find_product(basket, product_pk)]["quantity"] > 1:
@@ -57,6 +57,6 @@ def find_product(dic, pk):
     """
 
     for i in range(0, len(dic)):
-        if dic[i]["pk"] == pk:
-            return i
+        if dic[str(i)]["pk"] == pk:
+            return str(i)
     return False
