@@ -9,6 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% endblock %}
 
+    <link ref="icon" href="{{ MEDIA_URL }}r_e_logo.png"/>
+
     {% block corecss %}
         <style>
             html {
@@ -108,6 +110,9 @@
             .p-5 {
                 padding: 5px;
             }
+            .p-10 {
+                padding: 10px;
+            }
             .m-5 {
                 margin: 5px;
             }
@@ -150,6 +155,7 @@
 <body>
     <div class="top-bar">
         <div class="inline left">
+            <img src="{{ MEDIA_URL }}r_e_logo.png">
             <h1 class="logo-text inline">Retro Exchange</h1>
         </div>
         <div class="inline right dropdown">
@@ -171,14 +177,14 @@
 
     <div class="nav-bar">
         <form class="center half-upper-border" method="GET" action="">
-            <input class="border large-text p-5 m-5" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
+            <input class="border large-text p-10 m-5" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
             <datalist id="console">
                 <option value="No Specific Console"/>
                 <option value="Nintendo 64"/>
                 <option value="NES"/>
                 <option value="SNES"/>
             </datalist>
-            <input class="border large-text p-5 m-5" placeholder="What to search for?" class="no-default filter" name="q" list="search-for"/>
+            <input class="border large-text p-10 m-5" placeholder="What to search for?" class="no-default filter" name="q" list="search-for"/>
             <datalist id="search-for">
                 <option value="Consoles"/>
                 <option value="Games"/>
@@ -186,7 +192,7 @@
                 <option value="Bundles"/>
                 <option value="All"/>
             </datalist>
-            <input class="border large-text p-5 m-5" placeholder="What filter to apply?" class="no-default filter" name="f" list="filter"/>
+            <input class="border large-text p-10 m-5" placeholder="What filter to apply?" class="no-default filter" name="f" list="filter"/>
             <datalist id="filter">
                 <option value="A-Z"/>
                 <option value="Z-A"/>
@@ -194,7 +200,7 @@
                 <option value="Decending Price"/>
                 <option value="Rating"/>
             </datalist>
-            <button class="border" type="submit">
+            <button class="border p-5" type="submit">
                 Submit
             </button>
         </form>
