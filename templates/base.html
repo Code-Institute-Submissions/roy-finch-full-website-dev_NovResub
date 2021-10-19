@@ -165,7 +165,7 @@
                 width: 500px;
             }
             .search-bar {
-                width: 600px;
+                width: 30vw;
             }
             .fit-content {
                 width: fit-content;
@@ -194,7 +194,7 @@
             </div>
         </div>
         <div class="center m-t-35">
-            <form class="border fit-content" method="GET" action="">
+            <form class="border fit-content" method="GET" action="{% url 'products' %}">
                 <input class="search-bar" type="text" name="search" placeholder="Search Bar" >
                 <button class="border search-button">
                     <span>Search</span>
@@ -204,7 +204,7 @@
     </div>
 
     <div class="nav-bar">
-        <form class="center half-upper-border" method="GET" action="">
+        <form class="center half-upper-border" method="GET" action="{% url 'products' %}">
             <input class="border large-text p-10 m-5" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
             <datalist id="console">
                 <option value="No Specific Console"/>
