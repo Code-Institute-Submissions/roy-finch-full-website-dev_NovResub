@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # My created apps.ALLOWED_HOSTS
     'home',
+    'products',
 ]
 
 SITE_ID = 1
