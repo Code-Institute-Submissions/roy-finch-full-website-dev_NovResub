@@ -1,0 +1,26 @@
+[
+	{
+		"pk": 1,
+		"model":"products.console",
+		"fields": {
+			"name": "n64",
+			"display_name": "Nintendo 64"
+		}
+	},
+	{
+		"pk": 2,
+		"model":"products.console",
+		"fields": {
+			"name": "nes",
+			"display_name": "Nintendo Entertainment System"
+		}
+	},
+	{
+		"pk": 3,
+		"model":"products.console",
+		"fields": {
+			"name": "snes",
+			"display_name": "Super Nintendo Entertainment System"
+		}
+	}
+]
