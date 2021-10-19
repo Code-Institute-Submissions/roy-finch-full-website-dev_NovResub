@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content%}
+    <div class="inline center-text">
+        <div class="border p-20 m-5">
+            <p class="center-text extra-large-text"><b>{{ products.name }}</b></p>
+            <div class="product center-text">
+                <img src="/media/{{ products.image }}">
+            </div>
+            <p class="h-200">{{ products.description }}</p>
+            <div class="p-10 center-text">
+                <p class="extra-large-text">£ {{ products.price }}</p>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <button name="add" value="{{ products.pk }}" type="submit" class="themed-button">Add to Basket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+{% endblock %}

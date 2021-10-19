@@ -15,6 +15,7 @@
         <style>
             html {
                 overflow-x: hidden;
+                user-select: none;
             }
             body {
                 left: 0px;
@@ -26,6 +27,7 @@
                 border: none;
                 outline: none;
                 background: white;
+                color: black;
             }
             .top-bar {
                 padding: 0px 5px 5px 5px;
@@ -69,12 +71,17 @@
                 font-size: 16px;
                 color: black;
             }
+            .extra-large-text {
+                font-size: 22px;
+                color: black;
+            }
             .small-text {
                 font-size: 14px;
                 margin: 5px 0px 0px 0px;
                 color: black;
             }
             .half-upper-border {
+                background-color: white;
                 border: 1px solid grey;
                 border-top: none;
                 padding: 2px 20px 2px 20px;
@@ -82,6 +89,7 @@
                 border-bottom-right-radius: 20px;
             }
             .half-bottom-border {
+                background-color: white;
                 border: 1px solid grey;
                 border-bottom: none;
                 padding: 2px 20px 2px 20px;
@@ -110,10 +118,13 @@
                 border-radius: 20px;
                 padding: 10px;
             }
+            .w-100 {
+                width: 100px;
+            }
             .w-250 {
                 width: 250px;
             }
-            .h-600 {
+            .h-200 {
                 height: 200px;
             }
             .h-60 {
@@ -124,6 +135,9 @@
             }
             .p-10 {
                 padding: 10px;
+            }
+            .p-20 {
+                padding: 20px;
             }
             .m-5 {
                 margin: 5px;
@@ -167,8 +181,10 @@
 <body>
     <div class="top-bar">
         <div class="inline left">
-            <img src="{{ MEDIA_URL }}r_e_logo.png">
-            <h1 class="logo-text inline">Retro Exchange</h1>
+            <a href="{% url 'home' %}">
+                <img src="{{ MEDIA_URL }}r_e_logo.png">
+                <h1 class="logo-text inline">Retro Exchange</h1>
+            </a>
         </div>
         <div class="inline right dropdown">
             <a class="border">Accounts</a>
@@ -229,7 +245,7 @@
         {% endblock %}
     </div>
 
-    <div class="half-bottom-border right bottom">
+    <div class="half-bottom-border right bottom w-100 center-text">
         <br>
         <br>
         <br>
@@ -239,6 +255,7 @@
         {% else %}
             <span>£ 0.00</span>
         {% endif %}
+        <hr>
     </div>
 
     {% block postloadjs %}
