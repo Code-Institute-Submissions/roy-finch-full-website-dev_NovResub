@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <h2 class="logo-text"><b>BASKET</b></h2>
+    <p>These are the items that you have added to your basket.</p>
+{% endblock %}
+
+{% block content %}
+    <div class="center-text">
+        {% if basket_contents %}
+            {% for item in basket_contents %}
+                <div class="product-container">
+                    <a href="/products/{{ item.pk }}">
+                        {% if item.product.image %}
+                            <img src="/media/{{ item.product.image }}">
+                        {% endif %}
+                        <p class="name">{{ item.product.name }}</p>
+                        <p class="price">Price: £ {{ item.product.price|floatformat:2 }}</p>
+                        <p class="price">Quantity: {{ item.quantity }}</p>
+                        <p class="price">Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
+                        <p class="price">Total Cost: £{{ item.total_cost|floatformat:2 }}</p>
+                    </a>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <button name="remove" value="{{ item.pk }}" type="submit" class="white-black">Remove</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Sorry you have no items within your basket, use the link below to look for an item on the site to buy.</p>
+        {% endif %}
+    </div>
+    <div class="center-text">
+        <div class="side-content">
+            <a href="{% url 'products' %}">
+                <button class="white-black themed-button">Keep Shopping</button>
+            </a>
+        </div>
+        <div class="side-content">
+            {% if basket_contents %}
+                <a href="{% url 'checkout' %}">
+                    <button class="black-white themed-button">Checkout</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+{% endblock %}

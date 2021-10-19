@@ -256,10 +256,10 @@
     {% if messages %}
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
-
     <div class="main-content center-text">
+        {% block page_header %}
+        {% endblock %}
+        <hr>
         {% block content %}
         {% endblock %}
     </div>

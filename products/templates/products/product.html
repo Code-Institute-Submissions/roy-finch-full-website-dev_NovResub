@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block page_header %}
+    <h2><b>{{ products.name }}</b></h2>
+{% endblock %}
+
 {% block content%}
     <div class="inline center-text">
-        <div class="border p-20 m-5">
-            <p class="center-text extra-large-text"><b>{{ products.name }}</b></p>
+        <div class="p-20 m-5">
             <div class="center-text">
                 <img src="/media/{{ products.image }}">
             </div>
-            <p class="h-200">{{ products.description }}</p>
+            <p class="h-60">{{ products.description }}</p>
             <div class="p-10 center-text">
                 <p class="extra-large-text">£ {{ products.price }}</p>
                 <form method="POST" action="">

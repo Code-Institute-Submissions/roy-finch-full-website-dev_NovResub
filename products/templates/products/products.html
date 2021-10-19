@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block page_header %}
+    <h2><b>ALL PRODUCTS</b></h2>
+    <p>These are all the products that are listed below. You can search or filter the searches to try and narrow down your searchs for the products that you want to see.</p>
+{% endblock %}
+
 {% block content %}
     <div>
-        <div class="center-text">
-            <h2><b>ALL PRODUCTS</b></h2>
-            <p>These are all the products that are listed below. You can search or filter the searches to try and narrow down your searchs for the products that you want to see.</p>
-            <hr>
-        </div>
         <div class="m-5 p-5">
             {% for product in products %}
                 <div id="id{{ product.pk }}" class="border m-5 p-10 block w-250 h-600">
