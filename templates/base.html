@@ -254,6 +254,21 @@
     </div>
 
     {% if messages %}
+        <div>
+            {% for message in messages %}
+                {% with message.level as level %}
+                    {% if level == 40 %}
+                        {% include 'includes/toasts/toast_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/toasts/toast_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/toasts/toast_success.html' %}
+                    {% else %}
+                        {% include 'includes/toasts/toast_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </div>
     {% endif %}
 
     <div class="main-content center-text">
@@ -280,6 +295,9 @@
     </div>
 
     {% block postloadjs %}
+        <script>
+            $('.toast').toast('show');
+        </script>
     {% endblock %}
 </body>
 </html>

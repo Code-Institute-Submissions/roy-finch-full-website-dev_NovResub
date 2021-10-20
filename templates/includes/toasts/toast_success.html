@@ -1,0 +1,28 @@
+<div class="message-container">
+    <p class="logo success-color">Success</p>
+    <p>{{ message }}</p>
+    {% if basket_contents|length > 0 and can_display %}
+        <hr>
+        <p class="center-text">Your Basket</p>
+        <div class="scroll-container">
+            {% if grand_total %}
+                {% for item in basket_contents %}
+                    <div>
+                        <div class="center-text">
+                            {% if item.product.image %}
+                                <img class="m-icon" src="/media/{{ item.product.image }}">
+                            {% endif %}
+                        </div>
+                        <div class="center-text">
+                            <p>{{ item.product.name }}</p>
+                            <p>Quantity: {{ item.quantity }}</p>
+                            <p>Price: £{{ item.product.price|floatformat:2 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <hr>
+        <p>Total (Exc. Shipping): £{{ total|floatformat:2 }}</p>
+    {% endif %}
+</div>

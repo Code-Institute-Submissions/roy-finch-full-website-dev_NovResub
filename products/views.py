@@ -113,6 +113,7 @@ def product_detail(request, product_pk):
 
     if request.POST:
         check_request(request, product_pk)
+        redirect("products/"+str(product_pk))
 
     context = {
         "products": products,

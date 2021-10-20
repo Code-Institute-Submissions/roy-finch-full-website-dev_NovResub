@@ -23,6 +23,9 @@
                     </a>
                     <form method="POST" action="">
                         {% csrf_token %}
+                        <button name="add" value="{{ item.pk }}" type="submit" class="themed-button">Add</button>
+                        <br>
+                        <br>
                         <button name="remove" value="{{ item.pk }}" type="submit" class="themed-button">Remove</button>
                     </form>
                 </div>
@@ -37,13 +40,13 @@
     <div class="center-text">
         <div class="inline">
             <a href="{% url 'products' %}">
-                <button class="white-black themed-button">Keep Shopping</button>
+                <button class="themed-button">Keep Shopping</button>
             </a>
         </div>
         <div class="inline">
             {% if basket_contents %}
                 <a href="">
-                    <button class="black-white themed-button">Checkout</button>
+                    <button class="themed-button">Checkout</button>
                 </a>
             {% endif %}
         </div>
