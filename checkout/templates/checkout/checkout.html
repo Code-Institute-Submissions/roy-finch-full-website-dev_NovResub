@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <h2 class="center-text logo"><b>CHECKOUT</b></h2>
+    <p class="center-text">Finish of your delivery by completing the form below.</p>
+{% endblock %}
+
+{% block content%}
+    <div class="center-text m-b-10">
+        <p>Order Summary ({{ basket_contents|length }})</p>
+        <hr>
+        <div class="scroll-enabled">
+            {% if basket_contents %}
+                {% for item in basket_contents %}
+                    <div class="product-container">
+                        <img src="/media/{{ item.product.image }}">
+                            <p class="name">{{ item.product.name }}</p>
+                            <p class="price">Price: £ {{ item.product.price|floatformat:2 }}</p>
+                            <p class="price">Quantity: {{ item.quantity }}</p>
+                            <p class="price">Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
+                            <p class="price">Total Cost: £{{ item.total_cost|floatformat:2 }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Sorry you have no items within your basket, use the link below to look for an item on the site to buy.</p>
+            {% endif %}
+        </div>
+        <hr>
+        <p>Total: £{{ total | floatformat:2 }}</p>
+        <p>Shipping: £{{ shipping_total | floatformat:2 }}</p>
+        <p>Overal Total: £{{ grand_total | floatformat:2 }}</p>
+        <hr>
+    </div>
+    <div class="center-text">
+        <div>
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Your Details</legend>
+                    {{ order_form.full_name }}
+                    {{ order_form.email }}
+                    {{ order_form.phone_number }}
+                </fieldset>
+                <fieldset>
+                    <legend>Your Address</legend>
+                    {{ order_form.country }}
+                    {{ order_form.county }}
+                    {{ order_form.town_r_city }}
+                    {{ order_form.street_add_line1 }}
+                    {{ order_form.street_add_line2 }}
+                    {{ order_form.postcode }}
+                    <label for="save-order">Save Details:</label>
+                    <input type="checkbox" id="save-order"></input>
+                </fieldset>
+                <div>
+                    {% if basket_contents %}
+                        <button id="submit" type="submit" class="black-white themed-button">Finalise Payment of £{{ grand_total | floatformat:2 }}</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+{% endblock %}
