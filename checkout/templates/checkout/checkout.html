@@ -9,17 +9,16 @@
 {% block content%}
     <div class="center-text m-b-10">
         <p>Order Summary ({{ basket_contents|length }})</p>
-        <hr>
-        <div class="scroll-enabled">
+        <div class="scroll-enabled h-600">
             {% if basket_contents %}
                 {% for item in basket_contents %}
-                    <div class="product-container">
-                        <img src="/media/{{ item.product.image }}">
-                            <p class="name">{{ item.product.name }}</p>
-                            <p class="price">Price: £ {{ item.product.price|floatformat:2 }}</p>
-                            <p class="price">Quantity: {{ item.quantity }}</p>
-                            <p class="price">Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
-                            <p class="price">Total Cost: £{{ item.total_cost|floatformat:2 }}</p>
+                    <div class="border m-5 p-10 block w-250 h-600">
+                        <img class="icon" src="/media/{{ item.product.image }}">
+                            <p class="h-60">{{ item.product.name }}</p>
+                            <p>Price: £ {{ item.product.price|floatformat:2 }}</p>
+                            <p>Quantity: {{ item.quantity }}</p>
+                            <p>Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
+                            <p>Total Cost: £{{ item.total_cost|floatformat:2 }}</p>
                     </div>
                 {% endfor %}
             {% else %}
@@ -33,6 +32,7 @@
         <hr>
     </div>
     <div class="center-text">
+        <h2><b>Personal Details</b></h2>
         <div>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
@@ -55,7 +55,8 @@
                 </fieldset>
                 <div>
                     {% if basket_contents %}
-                        <button id="submit" type="submit" class="black-white themed-button">Finalise Payment of £{{ grand_total | floatformat:2 }}</button>
+                        <br>
+                        <button id="submit" type="submit" class="themed-button">Finalise Payment of £{{ grand_total | floatformat:2 }}</button>
                     {% endif %}
                 </div>
             </form>

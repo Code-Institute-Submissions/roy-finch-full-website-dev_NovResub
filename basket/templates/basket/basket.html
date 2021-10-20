@@ -15,7 +15,7 @@
                         {% if item.product.image %}
                             <img class="icon" src="/media/{{ item.product.image }}">
                         {% endif %}
-                        <p>{{ item.product.name }}</p>
+                        <p class="h-60">{{ item.product.name }}</p>
                         <p>Price: £ {{ item.product.price|floatformat:2 }}</p>
                         <p>Quantity: {{ item.quantity }}</p>
                         <p>Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
@@ -23,10 +23,8 @@
                     </a>
                     <form method="POST" action="">
                         {% csrf_token %}
-                        <button name="add" value="{{ item.pk }}" type="submit" class="themed-button">Add</button>
-                        <br>
-                        <br>
-                        <button name="remove" value="{{ item.pk }}" type="submit" class="themed-button">Remove</button>
+                        <button name="add" value="{{ item.pk }}" type="submit" class="w-100 m-l-5 themed-button">Add</button>
+                        <button name="remove" value="{{ item.pk }}" type="submit" class="w-100 themed-button">Remove</button>
                     </form>
                 </div>
             {% endfor %}
@@ -40,13 +38,13 @@
     <div class="center-text">
         <div class="inline">
             <a href="{% url 'products' %}">
-                <button class="themed-button">Keep Shopping</button>
+                <button class="w-200 themed-button">Keep Shopping</button>
             </a>
         </div>
         <div class="inline">
             {% if basket_contents %}
                 <a href="{% url 'checkout' %}">
-                    <button class="themed-button">Checkout</button>
+                    <button class="w-200 themed-button">Checkout</button>
                 </a>
             {% endif %}
         </div>
