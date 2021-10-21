@@ -32,10 +32,10 @@
                 color: black;
             }
             fieldset {
-                border-bottom: 1px solid grey;
+                border-top: 1px solid grey;
             }
             fieldset input[type="text"] {
-                padding: 5px 15px 5px 15px;
+                padding: 10px 15px 10px 15px;
                 margin: auto auto 5px auto;
                 display: block;
                 width: 60%;
@@ -43,7 +43,7 @@
                 border-radius: 20px;
             }
             fieldset input[type="email"] {
-                padding: 5px 15px 5px 15px;
+                padding: 10px 15px 10px 15px;
                 margin: auto auto 5px auto;
                 display: block;
                 width: 60%;
@@ -51,7 +51,7 @@
                 border-radius: 20px;
             }
             fieldset select {
-                padding: 5px 15px 5px 15px;
+                padding: 10px 15px 10px 15px;
                 margin: auto auto 5px auto;
                 display: block;
                 width: 60%;
@@ -68,13 +68,28 @@
                 display: inline-block;
                 border-bottom: 1px solid grey;
             }
-            .nav-bar {
-                padding: 0px 5px 5px 5px;
+            .info-bar {
+                padding: 5px 5px 5px 5px;
                 position: absolute;
                 top: 45px;
                 left: 0px;
+                text-align: center;
+                width: 100%;
+                border-bottom: 1px solid grey;
+            }
+            .nav-bar {
+                padding: 0px 5px 5px 5px;
+                position: absolute;
+                top: 77px;
+                left: 0px;
                 width: 100%;
                 display: inline-block;
+            }
+            .m-auto {
+                margin: auto;
+            }
+            .w-500 {
+                width: 500px;
             }
             .block {
                 display: inline-block;
@@ -249,10 +264,17 @@
                 height: 50px;
                 width: 100px;
             }
+            .theme {
+                color: white;
+                background-color: black;
+            }
         </style>
     {% endblock %}
 
     {% block corejs %}
+        <!-- This is for the stripe checkout system -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://js.stripe.com/v3/"></script>
     {% endblock %}
 
     <title>Retro Exchange</title>
@@ -291,7 +313,9 @@
             </form>
         </div>
     </div>
-
+    <div class="info-bar theme">
+        <span class="theme">All items on this website will be applied with a 10% increase in value for the shipping.</span>
+    </div>
     <div class="nav-bar">
         <form class="center half-upper-border" method="GET" action="{% url 'products' %}">
             <input class="border large-text p-10 m-5" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
