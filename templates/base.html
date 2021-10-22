@@ -298,7 +298,7 @@
                     {% if request.user.is_superuser %}
                         <a class="border">Edit Products</a>
                     {% endif %}
-                    <a class="border">My Account</a>
+                    <a href="{% url 'profile' %}" class="border">My Account</a>
                     <a href="{% url 'account_logout' %}" class="border">Logout</a>
                 </div>
             {% else %}

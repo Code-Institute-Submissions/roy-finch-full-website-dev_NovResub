@@ -23,7 +23,6 @@ def profile(request):
         form = ProfileForm(instance=profile)
     orders = profile.orders.all()
 
-    template = 'profiles/profiles.html'
     context = {
         "profile": profile,
         "form": form,
@@ -31,4 +30,4 @@ def profile(request):
         "check_display": False
     }
 
-    return render(request, template, context)
+    return render(request, 'profiles/profiles.html', context)

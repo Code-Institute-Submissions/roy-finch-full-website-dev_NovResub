@@ -8,6 +8,8 @@ from django.conf import settings
 
 import stripe
 
+from profiles.models import UserProfile
+from profiles.forms import ProfileForm
 from products.models import Product
 from basket.contexts import basket_contents
 from .forms import OrderForm
@@ -24,7 +26,7 @@ def cache_checkout_data(request):
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            "basket": json.dumps(request.session["basket"]),
+            "basket": json.dumps(simp_basket(request.session["basket"])),
             "save_order": request.POST.get("save_order"),
             "username": request.user,
         })
@@ -73,7 +75,7 @@ def checkout(request):
                             product=product,
                             quantity=basket[i]["quantity"],
                             indiv_item_total=(
-                                basket[i]["product"]["price"]*basket[i]["quantity"])
+                                basket[i]["price"]*basket[i]["quantity"])
                         )
                         indiv_items.save()
                 except Product.DoesNotExist:
@@ -81,7 +83,7 @@ def checkout(request):
                         "One of the items wasn't found,"
                         "please contact us for more information."))
                     order.delete()
-                    return redirect(reverse("view_bag"))
+                    return redirect(reverse("view_basket"))
 
             request.session["save_order"] = "save-order" in request.POST
             return redirect(reverse(
@@ -101,6 +103,25 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY
         )
+
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    "full_name": profile.user.get_full_name(),
+                    "email": profile.user.email,
+                    "phone_number": profile.default_phone_number,
+                    "country": profile.default_country,
+                    "county": profile.default_county,
+                    "town_r_city": profile.default_town_r_city,
+                    "street_add_line1": profile.default_street_add_line1,
+                    "street_add_line2": profile.default_street_add_line2,
+                    "postcode": profile.default_postcode,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
 
     if not stripe_public_key or not stripe_secret_key:
         messages.warning(request, "Stripe key is not set.")
@@ -123,7 +144,26 @@ def checkout_success(request, order_number):
     the order number and info the user would need
     afterwards
     """
+    save_order = request.session.get('save_order')
     order = get_object_or_404(Order, order_number=order_number)
+
+    profile = UserProfile.objects.get(user=request.user)
+    order.user_profile = profile
+    order.save()
+
+    if save_order:
+        profile_data = {
+            "default_phone_number": order.phone_number,
+            "default_country": order.country,
+            "default_county": order.county,
+            "default_street_add_line1": order.street_add_line1,
+            "default_street_add_line2": order.street_add_line2,
+            "default_town_r_city": order.town_r_city,
+            "default_postcode": order.postcode
+        }
+        profile_form = ProfileForm(profile_data, instance=profile)
+        if profile_form.is_valid():
+            profile_form.save()
 
     if "basket" in request.session:
         del request.session["basket"]
