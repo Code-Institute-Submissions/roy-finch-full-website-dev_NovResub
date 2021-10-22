@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <h2 class="center-text logo"><b>ADD PRODUCT</b></h2>
+    <p class="center-text">Here you can add a product to the database.</p>
+{% endblock %}
+
+{% block content%}
+<div class="border m-10 p-10">
+    <div class="center-text">
+        <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+            <p>Add details below about the new product you'd like tod add.</p>
+            <hr>
+            {% csrf_token %}
+            {{ form }}
+            <button id="submit" type="submit" class="black-white themed-button">Add Product</button>
+        </form>
+    </div>
+</div>
+<br>
+<hr>
+<br>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <h2 class="center-text logo"><b>EDIT PRODUCT</b></h2>
+    <p class="center-text">Here you can add a product to the database.</p>
+{% endblock %}
+
+{% block content%}
+    <div class="border m-10 p-10">
+        <div class="center-text">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>Add details below about the new product you'd like tod add.</p>
+                {{ form }}
+                <hr>
+                <label for="delete">Delete Product:<br><span class="error-color">To delete this product, please say "DELETE" in the input field below</span></label>
+                <input class="error-color center-text" type="input" id="delete" name="delete"></input>
+                <button id="submit" type="submit" class="black-white themed-button">Update Product</button>
+            </form>
+        </div>
+    </div>
+<br>
+<hr>
+<br>
+{% endblock %}
