@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 
@@ -9,7 +9,7 @@ import stripe
 from products.models import Product
 from basket.contexts import basket_contents
 from .forms import OrderForm
-from .models import Order_Items
+from .models import Order, Order_Items
 
 
 def checkout(request):
@@ -87,6 +87,26 @@ def checkout(request):
         "order_form": order_form,
         "stripe_public_key": stripe_public_key,
         "client_key": intent.client_secret,
+    }
+
+    return render(request, template, context)
+
+
+def checkout_success(request, order_number):
+    """
+    Function for when a payment is successful
+    it will take the user to a page dedicated to
+    the order number and info the user would need
+    afterwards
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    if "basket" in request.session:
+        del request.session["basket"]
+
+    template = "checkout/checkout_success.html"
+    context = {
+        "order": order
     }
 
     return render(request, template, context)

@@ -23,7 +23,6 @@ var style = {
 var card = elements.create("card", {
     style: style
 });
-
 card.mount("#card-element");
 
 card.addEventListener("change", function(event) {
@@ -37,3 +36,69 @@ card.addEventListener("change", function(event) {
         errorC.innerHTML = "";
     }
 });
+
+var form = document.getElementById("payment-form");
+
+form.addEventListener("submit", function(ev) {
+    ev.preventDefault();
+    card.update({
+        "disabled": true
+    });
+    document.getElementById("submit").setAttribute("disabled", true);
+    var saveOrder = Boolean($("#id-save-order").attr("checked"));
+    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    var postData = {
+        "csrfmiddlewaretoken": csrfToken,
+        "client_secret": clientKey,
+        "save_order": saveOrder,
+    };
+    var url = "/checkout/cache_checkout_data/";
+
+    $.post(url, postData).done(function() {
+        stripe.confirmCardPayment(clientKey, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: $.trim(form.full_name.value),
+                    phone: $.trim(form.phone_number.value),
+                    email: $.trim(form.email.value),
+                    address: {
+                        country: $.trim(form.country.value),
+                        county: $.trim(form.county.value),
+                        city: $.trim(form.town_r_city.value),
+                        line1: $.trim(form.street_add_line1.value),
+                        line2: $.trim(form.street_add_line2.value),
+                    }
+                },
+                shipping: {
+                    name: $.trim(form.full_name.value),
+                    phone: $.trim(form.phone_number.value),
+                    email: $.trim(form.email.value),
+                    address: {
+                        country: $.trim(form.country.value),
+                        county: $.trim(form.county.value),
+                        city: $.trim(form.town_r_city.value),
+                        line1: $.trim(form.street_add_line1.value),
+                        line2: $.trim(form.street_add_line2.value),
+                        postcode: $.trim(form.postcode.value),
+                    }
+                }
+            }
+        }).then(function(result) {
+            if (result.error) {
+                var html = "<span class='error'>${ event.error.message }</span>";
+                $(errorC).html(html);
+                card.update({
+                    "disabled": false
+                });
+                $('#submit').attr('disabled', false);;
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
+            }
+        })
+    }).fail(function () {
+        location.reload();
+    })
+})

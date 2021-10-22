@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content%}
+    <div class="main-content">
+        <div class="sub-content center-text">
+            <h2 class="logo"><b>THANK YOU</b></h2>
+            <p>Thank you for shopping with Retro Exchange.</p>
+            <p class="retro">Your order number is <b>{{ order.order_number }}</b></p>
+            <div>
+                {% for item in order.indiv_items.all %}
+                    <div class="product-container">
+                        <img class="s-icon" src="/media/{{ item.product.image }}">
+                        <p>{{ item.product.name }}</p>
+                        <p>{{ item.quantity }} X £{{ item.product.price }} + 10% Shipping</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="center-text div-circle-con">
+                <p>The order will be delivered to the address that has been given.</p>
+                <p>{{ order.full_name }}</p>
+                <p>{{ order.country }}</p>
+                <p>{{ order.county }}</p>
+                <p>{{ order.street_add_line1 }}</p>
+                <p>{{ order.street_add_line2 }}</p>
+                <p>{{ order.postcode }}</p>
+            </div>
+            <hr>
+            <a href="{% url 'home' %}">
+                <button class="black-white themed-button">Return to Homepage</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
