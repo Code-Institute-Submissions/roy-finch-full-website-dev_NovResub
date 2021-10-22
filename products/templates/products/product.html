@@ -16,7 +16,7 @@
                 <p class="extra-large-text">£ {{ products.price }}</p>
                 <form method="POST" action="">
                     {% csrf_token %}
-                    <button name="add" value="{{ products.pk }}" type="submit" class="themed-button">Add to Basket</button>
+                    <button name="add" value="{{ products.pk }}" type="submit" class="w-250 themed-button">Add to Basket</button>
                 </form>
             </div>
         </div>

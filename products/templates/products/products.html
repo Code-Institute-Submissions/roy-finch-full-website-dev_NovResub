@@ -18,7 +18,7 @@
                     </a>
                     <form method="POST" action="">
                         {% csrf_token %}
-                        <button name="add" value="{{ product.pk }}" type="submit" class="themed-button">Add to Basket</button>
+                        <button name="add" value="{{ product.pk }}" type="submit" class="themed-button w-250">Add to Basket</button>
                     </form>
                 </div>
             {% endfor %}
