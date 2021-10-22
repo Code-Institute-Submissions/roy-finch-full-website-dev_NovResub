@@ -70,6 +70,7 @@
             }
             .info-bar {
                 padding: 5px 5px 5px 5px;
+                background-color: black;
                 position: absolute;
                 top: 45px;
                 left: 0px;
@@ -268,6 +269,9 @@
                 color: white;
                 background-color: black;
             }
+            .white {
+                color: white;
+            }
         </style>
     {% endblock %}
 
@@ -313,8 +317,8 @@
             </form>
         </div>
     </div>
-    <div class="info-bar theme">
-        <span class="theme">All items on this website will be applied with a 10% increase in value for the shipping.</span>
+    <div class="info-bar">
+        <span class="white">All items on this website will be applied with a 10% increase in value for the shipping.</span>
     </div>
     <div class="nav-bar">
         <form class="center half-upper-border" method="GET" action="{% url 'products' %}">

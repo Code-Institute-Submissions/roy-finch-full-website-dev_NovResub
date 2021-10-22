@@ -1,6 +1,8 @@
 import json
 
 from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 from django.contrib import messages
 from django.conf import settings
 
@@ -10,6 +12,28 @@ from products.models import Product
 from basket.contexts import basket_contents
 from .forms import OrderForm
 from .models import Order, Order_Items
+
+
+@require_POST
+def cache_checkout_data(request):
+    """
+    This function will cache any data about the checkout
+    so that it can be accessed from other entries
+    """
+    try:
+        pid = request.POST.get("client_secret").split("_secret")[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            "basket": json.dumps(request.session["basket"]),
+            "save_order": request.POST.get("save_order"),
+            "username": request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, "Sorry your payment cant be"
+                                " proccessed right now."
+                                " Please try again later.")
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -49,7 +73,7 @@ def checkout(request):
                             product=product,
                             quantity=basket[i]["quantity"],
                             indiv_item_total=(
-                                basket[i]["price"]*basket[i]["quantity"])
+                                basket[i]["product"]["price"]*basket[i]["quantity"])
                         )
                         indiv_items.save()
                 except Product.DoesNotExist:
