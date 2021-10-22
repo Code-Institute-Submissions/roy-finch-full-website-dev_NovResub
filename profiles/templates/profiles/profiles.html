@@ -1,59 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block page_header %}
+    <h2><b>MY PROFILE</b></h2>
+    <p>Here you can check your favourites or just save some personal information for quicker checkout.</p>
+{% endblock %}
+
 {% block content%}
-    <div class="main-content">
-        <div class="sub-content">
-            <h2 class="center-text logo"><b>MY PROFILE</b></h2>
-            <p class="center-text">Here you can check your favourites or just save some personal information for quicker checkout.</p>
-            <hr>
-        </div>
-        <div class="div-circle-con">
+<div class="border m-10 p-10">
+    <div class="center-text">
+        <p>YOUR DETAILS</p>
+        <p>Here you can save some default settings just to make checkout easier for you later.</p>
+        <form action="{% url 'profile' %}" method="POST" id="profile-form">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Your Address</legend>
+                {{ form }}
+            </fieldset>
             <div class="center-text">
-                <p class="center-text logo">YOUR DETAILS</p>
-                <p class="center-text">Here you can save some default settings just to make checkout easier for you later.</p>
-                <form class="center-text" action="{% url 'profile' %}" method="POST" id="profile-form">
-                    {% csrf_token %}
-                    <fieldset>
-                        <legend>Your Address</legend>
-                        {{ form }}
-                    </fieldset>
-                    <div class="center-text">
-                        <a href="{% url 'view_basket' %}">
-                            <button type="none" class="black-white themed-button">Save Settings</button>
-                        </a>
-                    </div>
-                </form>
+                <a href="{% url 'view_basket' %}">
+                    <button type="none" class="black-white themed-button">Save Settings</button>
+                </a>
             </div>
-        </div>
-        <div class="div-circle-con">
-            <p class="logo center-text">ORDER HISTORY</p>
-            {% if orders %}
-                <p class="center-text">Hover over an order to get more details</p>
-                {% for order in orders %}
-                    <div class="dropdown div-circle-con center-text">
-                        <span>{{ order.date }}</span>
-                        <span>{{ order.order_number }}</span>
-                        <div class="dropdown-container">
-                            {% for item in order.indiv_items.all %}
-                                <div class="product-container">
-                                    <img class="s-icon" src="/media/{{ item.product.image }}">
-                                    <p>{{ item.product.name }}</p>
-                                    <p>{{ item.quantity }} X £{{ item.product.price }}</p>
-                                </div>
-                            {% endfor %}
-                            <p class="center-text">Total: £{{ order.order_total }}</p>
-                            <p class="center-text">Shipping: £{{ order.delivery_cost }}</p>
-                            <p class="center-text">Grand Total: £{{ order.grand_total }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                    <p class="center-text">Oops, sorry you have no order history to be shown here.</p>
-            {% endif %}
-        </div>
-        <br>
-        <hr>
-        <br>
+        </form>
     </div>
+</div>
+<div class="border p-10 m-10 center-text">
+    <p>ORDER HISTORY</p>
+    {% if orders %}
+        <p>Hover over an order to get more details</p>
+        {% for order in orders %}
+            <div class="dropdown border center-text">
+                <span>{{ order.date }}</span>
+                <span>{{ order.order_number }}</span>
+                <div class="dropdown-container">
+                    {% for item in order.indiv_items.all %}
+                        <div class="border m-5 p-10 block w-250 h-600">
+                            <img class="s-icon" src="/media/{{ item.product.image }}">
+                            <p>{{ item.product.name }}</p>
+                            <p>{{ item.quantity }} X £{{ item.product.price }}</p>
+                        </div>
+                    {% endfor %}
+                    <p>Total: £{{ order.order_total }}</p>
+                    <p>Shipping: £{{ order.delivery_cost }}</p>
+                    <p>Grand Total: £{{ order.grand_total }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+            <p>Oops, sorry you have no order history to be shown here.</p>
+    {% endif %}
+</div>
+<br>
+<hr>
+<br>
 {% endblock %}
