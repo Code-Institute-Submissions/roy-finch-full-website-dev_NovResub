@@ -1,8 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Product
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.contrib import messages
 from basket.views import update_basket
+from django.contrib.auth.decorators import login_required
+from .forms import ProductForm
 
 consoles = ["No Specific Console", "Nintendo 64", "NES", "SNES"]
 categories = ["All", "Consoles", "Games", "Accessories", "Bundles"]
@@ -122,3 +125,100 @@ def product_detail(request, product_pk):
     }
 
     return render(request, "products/product.html", context)
+
+
+@login_required
+def add_product(request):
+    """
+    This is to add an item to the product list as admin
+    """
+    check_super(request)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully added the product")
+            return redirect(reverse("find_product"))
+        else:
+            messages.error(
+                request, "Issue with the form, the information is not valid.")
+    else:
+        form = ProductForm()
+    template = "products/add_product.html"
+    context = {
+        "form": form,
+        "check_display": False
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def find_product(request):
+    """
+    This is to find and alter a product
+    """
+    check_super(request)
+    list_products = Product.objects.all()
+
+    if "select" in request.GET:
+        if request.GET["select"] == "New Product":
+            return redirect(reverse("add_product"))
+        else:
+            product = get_object_or_404(Product, name=request.GET["select"])
+            return redirect(reverse("edit_product", args=[product.pk]))
+
+    template = "products/find_product.html"
+
+    context = {
+        "products": list_products,
+        "check_display": False
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def edit_product(request, product_pk):
+    """
+    Edit a product once found using the find
+    function
+    """
+    check_super(request)
+    product = get_object_or_404(Product, pk=product_pk)
+    form = ProductForm(instance=product)
+
+    if request.method == "POST":
+        if "delete" in request.POST and request.POST["delete"] == "DELETE":
+            product.delete()
+            messages.success(request, "Product is deleted")
+            return redirect(reverse("find_product"))
+        else:
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Successfully updated the product")
+                return redirect(reverse("find_product"))
+            else:
+                messages.error(
+                    request,
+                    "Issue with the form, the information is not valid.")
+
+    template = "products/edit_product.html"
+    context = {
+        "form": form,
+        "check_display": False
+    }
+
+    return render(request, template, context)
+
+
+def check_super(request):
+    """
+    Function to check if a user
+    has the correct access level
+    on the site
+    """
+    if not request.user.is_superuser:
+        messages.error(request, "Oops, this is for the store owner.")
+        return redirect(reverse("home"))

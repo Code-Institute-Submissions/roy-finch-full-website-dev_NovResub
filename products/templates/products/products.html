@@ -4,6 +4,10 @@
 {% block page_header %}
     <h2><b>ALL PRODUCTS</b></h2>
     <p>These are all the products that are listed below. You can search or filter the searches to try and narrow down your searchs for the products that you want to see.</p>
+    <hr>
+    {% if not search_q == None %}
+        <p class="center-text">For the search "{{ search_q }}", it returns {{ return_num}} search results.</p>
+    {% endif %}
 {% endblock %}
 
 {% block content %}

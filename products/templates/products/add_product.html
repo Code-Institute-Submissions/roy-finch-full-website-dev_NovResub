@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block page_header %}
-    <h2 class="center-text logo"><b>ADD PRODUCT</b></h2>
-    <p class="center-text">Here you can add a product to the database.</p>
+    <h2><b>ADD PRODUCT</b></h2>
+    <p>Here you can add a product to the database.</p>
 {% endblock %}
 
 {% block content%}
@@ -13,8 +13,11 @@
             <p>Add details below about the new product you'd like tod add.</p>
             <hr>
             {% csrf_token %}
-            {{ form }}
-            <button id="submit" type="submit" class="black-white themed-button">Add Product</button>
+            <fieldset>
+                {{ form }}
+            </fieldset>
+            <br>
+            <button id="submit" type="submit" class="themed-button">Add Product</button>
         </form>
     </div>
 </div>
