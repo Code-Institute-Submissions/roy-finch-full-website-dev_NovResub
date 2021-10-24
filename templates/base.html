@@ -12,7 +12,7 @@
     <link ref="icon" href="/media/r_e_logo.png"/>
 
     {% block corecss %}
-        <link rel="stylesheet" href="/static/css/base.css">
+        <link ref="stylesheet" href="/static/css/base.css">
     {% endblock %}
 
     {% block corejs %}
@@ -28,7 +28,7 @@
         <div class="inline left">
             <a href="{% url 'home' %}">
                 <img class="s-icon" src="/media/r_e_logo.png">
-                <h1 class="logo-text inline">Retro Exchange</h1>
+                <h1 class="logo-text inline s-hide">Retro Exchange</h1>
             </a>
         </div>
         <div class="inline right dropdown">
