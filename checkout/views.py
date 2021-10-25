@@ -26,12 +26,13 @@ def cache_checkout_data(request):
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            "basket": json.dumps(simp_basket(request.session["basket"])),
+            "basket": json.dumps(request.session["basket"]),
             "save_order": request.POST.get("save_order"),
             "username": request.user,
         })
         return HttpResponse(status=200)
     except Exception as e:
+        print(e)
         messages.error(request, "Sorry your payment cant be"
                                 " proccessed right now."
                                 " Please try again later.")
