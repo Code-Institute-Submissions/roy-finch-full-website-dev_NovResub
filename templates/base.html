@@ -9,10 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% endblock %}
 
-    <link ref="icon" href="/media/r_e_logo.png"/>
-
+    <link ref="icon" src="{{ MEDIA_URL }}r_e_logo.png"/>
+    
     {% block corecss %}
-        <link ref="stylesheet" href="/static/css/base.css">
+        <link ref="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block corejs %}
@@ -27,7 +27,7 @@
     <div class="top-bar">
         <div class="inline left">
             <a href="{% url 'home' %}">
-                <img class="s-icon" src="/media/r_e_logo.png">
+                <img class="s-icon" src="{{ MEDIA_URL }}r_e_logo.png">
                 <h1 class="logo-text inline s-hide">Retro Exchange</h1>
             </a>
         </div>
@@ -120,7 +120,7 @@
     <div class="half-bottom-border right bottom center-text w-180">
         <a href="{% url 'basket' %}">
             <br>
-            <img class="m-icon" src="/media/basket.png">
+            <img class="m-icon" src="{{ MEDIA_URL }}basket.png">
             <br>
             {% if grand_total %}
                 <span><b>£ {{ grand_total|floatformat:2 }}</b></span>

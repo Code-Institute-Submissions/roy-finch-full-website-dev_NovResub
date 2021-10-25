@@ -15,7 +15,7 @@
             {% for product in products %}
                 <div id="id{{ product.pk }}" class="border m-5 p-10 block w-250 h-600">
                     <a href="{{ product.pk }}">
-                        <img class="icon" src="/media/{{ product.image }}">
+                        <img class="icon" src="{{ MEDIA_URL }}{{ product.image }}">
                         <p class="name h-60">{{ product.name }}</p>
                         <p class="price">£ {{ product.price }}</p>
                     </a>
