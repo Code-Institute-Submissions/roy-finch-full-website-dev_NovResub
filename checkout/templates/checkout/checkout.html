@@ -13,7 +13,7 @@
             {% if basket_contents %}
                 {% for item in basket_contents %}
                     <div class="border m-5 p-10 block w-250 h-600">
-                        <img class="icon" src="/media/{{ item.product.image }}">
+                        <img class="icon" src="{{ MEDIA_URL }}{{ item.product.image }}">
                             <p class="h-60">{{ item.product.name }}</p>
                             <p>Price: £ {{ item.product.price|floatformat:2 }}</p>
                             <p>Quantity: {{ item.quantity }}</p>

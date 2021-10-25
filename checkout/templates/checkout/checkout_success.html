@@ -10,13 +10,13 @@
             <div>
                 {% for item in order.indiv_items.all %}
                     <div class="product-container">
-                        <img class="s-icon" src="/media/{{ item.product.image }}">
+                        <img class="s-icon" src="{{ MEDIA_URL }}{{ item.product.image }}">
                         <p>{{ item.product.name }}</p>
                         <p>{{ item.quantity }} X £{{ item.product.price }} + 10% Shipping</p>
                     </div>
                 {% endfor %}
             </div>
-            <div class="center-text div-circle-con">
+            <div class="center-text border p-10 m-10">
                 <p>The order will be delivered to the address that has been given.</p>
                 <p>{{ order.full_name }}</p>
                 <p>{{ order.country }}</p>

@@ -13,7 +13,7 @@
                 <div class="border m-5 p-10 block w-250 h-600">
                     <a href="/products/{{ item.pk }}">
                         {% if item.product.image %}
-                            <img class="icon" src="/media/{{ item.product.image }}">
+                            <img class="icon" src="{{ MEDIA_URL }}{{ item.product.image }}">
                         {% endif %}
                         <p class="h-60">{{ item.product.name }}</p>
                         <p>Price: £ {{ item.product.price|floatformat:2 }}</p>

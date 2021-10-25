@@ -1,0 +1,32 @@
+Hello {{ order.full_name }}
+
+Thank you for shopping with our service, we greatly appreciate it!
+
+This is to confirm that you have placed an order with us and inside this contains the information like order number and date of reference
+and some personal information you have given us for the delivery of the item('s).
+
+---------------------------------------------
+Order Number: {{ order.order_number }}
+Date of Order: {{ order.date }}
+---------------------------------------------
+Order Total: {{ order.order_total }}
+Delivery: {{ order.delivery_cost }}
+---------------------------------------------
+Grand Total: {{ order.grand_total }}
+---------------------------------------------
+
+Your order will be delivered to the address below.
+
+---------------------------------------------
+{{ order.country }},
+{{ order.county }}
+{{ order..street_add_line1 }}
+{{ order..street_add_line2 }}
+---------------------------------------------
+
+We have your phone number as {{ order.phone_number }}.
+
+Contact us if you have any issues or would like to discuss your order at {{ contact_email }}.
+
+Sincerly,
+Retro Exchange
