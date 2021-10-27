@@ -5,28 +5,30 @@
     <h2><b>ALL PRODUCTS</b></h2>
     <p>These are all the products that are listed below. You can search or filter the searches to try and narrow down your searchs for the products that you want to see.</p>
     {% if not search_q == None %}
-        <p class="center-text">For the search "{{ search_q }}", it returns {{ return_num}} search results.</p>
+        <p>For the search "{{ search_q }}", it returns {{ return_num}} search results.</p>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <div>
-        <div class="m-5 p-5">
-            {% for product in products %}
-                <div id="id{{ product.pk }}" class="border m-5 p-10 block w-250 h-600">
-                    <a href="{{ product.pk }}">
-                        <img class="icon" src="{{ MEDIA_URL }}{{ product.image }}">
-                        <p class="name h-60">{{ product.name }}</p>
-                        <p class="price">£ {{ product.price }}</p>
+    <div class="row justify-content-md-center">
+        {% for product in products %}
+            <div id="id{{ product.pk }}" class="border col-2 d-inline p-1 m-1">
+                <div class="h-75">
+                    <a class="text-dark" href="{{ product.pk }}">
+                        <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ product.image }}">
+                        <p>{{ product.name }}</p>
+                        <p>£ {{ product.price|floatformat:2 }}</p>
                     </a>
-                    <form method="POST" action="">
+                </div>
+                <div class="h-25">
+                    <form class="h-25" method="POST" action="">
                         {% csrf_token %}
-                        <button name="add" value="{{ product.pk }}" type="submit" class="themed-button w-225">Add to Basket</button>
+                        <button name="add" value="{{ product.pk }}" type="submit" class="w-75 p-2 border-0 bg-dark text-light mb-5">Add to Basket</button>
                     </form>
                 </div>
-            {% endfor %}
-        </div>
-        <br>
-        <hr>
+            </div>
+        {% endfor %}
     </div>
+    <br>
+    <hr>
 {% endblock %}

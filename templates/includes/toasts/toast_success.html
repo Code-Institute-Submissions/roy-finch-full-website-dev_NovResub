@@ -1,28 +1,6 @@
-<div class="center-text half-bottom-border bottom right w-180 p-b-135">
-    <p class="green">Success</p>
+<div class="border fixed-bottom text-center rounded-top border-bottom-0 bg-white">
+    <p class="text-success">Success</p>
     <p>{{ message }}</p>
-    {% if basket_contents|length > 0 and can_display %}
-        <hr>
-        <p>Your Basket</p>
-        <div class="scroll-enabled h-125">
-            {% if grand_total %}
-                {% for item in basket_contents %}
-                    <div>
-                        <div>
-                            {% if item.product.image %}
-                                <img class="icon" src="/media/{{ item.product.image }}">
-                            {% endif %}
-                        </div>
-                        <div>
-                            <p>{{ item.product.name }}</p>
-                            <p>Quantity: {{ item.quantity }}</p>
-                            <p>Price: £{{ item.product.price|floatformat:2 }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <hr>
-        <p>Total (Exc. Shipping): £{{ total|floatformat:2 }}</p>
-    {% endif %}
+    <hr>
+    <p>Total (Exc. Shipping): £{{ total|floatformat:2 }}</p>
 </div>

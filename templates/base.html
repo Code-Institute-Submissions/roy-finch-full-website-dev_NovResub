@@ -1,18 +1,16 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x: hidden; user-select: none;">
 <head>
     {% block meta %}
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% endblock %}
-
-    <link ref="shortcut icon" href="{{ MEDIA_URL }}r_e_logo.png"/>
     
     {% block corecss %}
-        <link ref="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     {% endblock %}
 
     {% block corejs %}
@@ -24,71 +22,67 @@
     <title>Retro Exchange</title>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="inline left">
-            <a href="{% url 'home' %}">
-                <img class="s-icon" src="{{ MEDIA_URL }}r_e_logo.png">
-                <h1 class="logo-text inline s-hide">Retro Exchange</h1>
+    <div class="row m-2">
+        <div class="col-4">
+            <a class="text-dark" href="{% url 'home' %}">
+                <h1 class="d-inline">Retro Exchange</h1>
             </a>
         </div>
-        <div class="inline right dropdown">
-            <a class="border">Options</a>
+        <div class="col-6">
+            <form class="h-100" method="GET" action="{% url 'products' %}">
+                <input class="border h-100 w-75 pl-5" type="text" name="search" placeholder="Search Bar" >
+                <button class="col-2 h-100 border">Search</button>
+            </form>
+        </div>
+        <div class="col-2 mt-3 mb-2 h-100">
+            {% if request.user.is_superuser %}
+                <a href="{% url 'find_product' %}" class="border text-dark bg-light p-2">Find Products</a>
+            {% endif %}
             {% if request.user.is_authenticated %}
-                <div class="dropdown-container">
-                    {% if request.user.is_superuser %}
-                        <a href="{% url 'find_product' %}" class="border">Find Products</a>
-                    {% endif %}
-                    <a href="{% url 'profile' %}" class="border">My Account</a>
-                    <a href="{% url 'account_logout' %}" class="border">Logout</a>
-                </div>
+                <a href="{% url 'profile' %}" class="border text-dark bg-light p-2">My Account</a>
+                <a href="{% url 'account_logout' %}" class="border text-dark bg-light p-2">Logout</a>
             {% else %}
-                <div class="dropdown-container">
-                    <a href="{% url 'account_signup' %}" class="border">Signup</a>
-                    <a href="{% url 'account_login' %}" class="border">Login</a>
-                </div>
+                <a href="{% url 'account_signup' %}" class="border text-dark bg-light p-2">Signup</a>
+                <a href="{% url 'account_login' %}" class="border text-dark bg-light p-2">Login</a>
             {% endif %}
         </div>
-        <div class="center m-t-35">
-            <form class="border fit-content" method="GET" action="{% url 'products' %}">
-                <input class="search-bar" type="text" name="search" placeholder="Search Bar" >
-                <button class="border search-button">
-                    <span>Search</span>
+    </div>
+    <div class="row bg-dark">
+        <div class="col-12 text-center bg-dark">
+            <span class="text-white">All items on this website will be applied with a 10% increase in value for the shipping.</span>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-7">
+            <form class="text-center border rounded-bottom p-3" method="GET" action="{% url 'products' %}">
+                <input class="border" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
+                <datalist id="console">
+                    <option value="No Specific Console"/>
+                    <option value="Nintendo 64"/>
+                    <option value="NES"/>
+                    <option value="SNES"/>
+                </datalist>
+                <input class="border" placeholder="What to search for?" class="no-default filter" name="q" list="search-for"/>
+                <datalist id="search-for">
+                    <option value="Consoles"/>
+                    <option value="Games"/>
+                    <option value="Accessories"/>
+                    <option value="Bundles"/>
+                    <option value="All"/>
+                </datalist>
+                <input class="border" placeholder="What filter to apply?" class="no-default filter" name="f" list="filter"/>
+                <datalist id="filter">
+                    <option value="A-Z"/>
+                    <option value="Z-A"/>
+                    <option value="Ascending Price"/>
+                    <option value="Decending Price"/>
+                    <option value="Rating"/>
+                </datalist>
+                <button class="border" type="submit">
+                    Submit
                 </button>
             </form>
         </div>
-    </div>
-    <div class="info-bar">
-        <span class="white">All items on this website will be applied with a 10% increase in value for the shipping.</span>
-    </div>
-    <div class="nav-bar">
-        <form class="center half-upper-border" method="GET" action="{% url 'products' %}">
-            <input class="border large-text p-10 m-5" placeholder="Choose a console?" class="no-default filter" name="c" list="console"/>
-            <datalist id="console">
-                <option value="No Specific Console"/>
-                <option value="Nintendo 64"/>
-                <option value="NES"/>
-                <option value="SNES"/>
-            </datalist>
-            <input class="border large-text p-10 m-5" placeholder="What to search for?" class="no-default filter" name="q" list="search-for"/>
-            <datalist id="search-for">
-                <option value="Consoles"/>
-                <option value="Games"/>
-                <option value="Accessories"/>
-                <option value="Bundles"/>
-                <option value="All"/>
-            </datalist>
-            <input class="border large-text p-10 m-5" placeholder="What filter to apply?" class="no-default filter" name="f" list="filter"/>
-            <datalist id="filter">
-                <option value="A-Z"/>
-                <option value="Z-A"/>
-                <option value="Ascending Price"/>
-                <option value="Decending Price"/>
-                <option value="Rating"/>
-            </datalist>
-            <button class="border p-5" type="submit">
-                Submit
-            </button>
-        </form>
     </div>
 
     {% if messages %}
@@ -109,7 +103,7 @@
         </div>
     {% endif %}
 
-    <div class="main-content center-text">
+    <div class="text-center ml-5 mr-5 p-5">
         {% block page_header %}
         {% endblock %}
         <hr>
@@ -117,10 +111,10 @@
         {% endblock %}
     </div>
 
-    <div class="half-bottom-border right bottom center-text w-180">
-        <a href="{% url 'basket' %}">
+    <div class="border fixed-bottom text-center rounded-top border-bottom-0 ml-5 bg-white" style="width: 200px;">
+        <a class="text-dark" href="{% url 'basket' %}">
             <br>
-            <img class="m-icon" src="{{ MEDIA_URL }}basket.png">
+            <img class="w-75" src="{{ MEDIA_URL }}basket.png">
             <br>
             {% if grand_total %}
                 <span><b>£ {{ grand_total|floatformat:2 }}</b></span>

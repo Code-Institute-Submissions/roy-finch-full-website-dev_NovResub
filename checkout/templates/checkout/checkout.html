@@ -7,18 +7,19 @@
 {% endblock %}
 
 {% block content%}
-    <div class="center-text m-b-10">
+    <div>
         <p>Order Summary ({{ basket_contents|length }})</p>
-        <div class="scroll-enabled h-600">
+        <div class="row justify-content-md-center">
             {% if basket_contents %}
                 {% for item in basket_contents %}
-                    <div class="border m-5 p-10 block w-250 h-600">
-                        <img class="icon" src="{{ MEDIA_URL }}{{ item.product.image }}">
-                            <p class="h-60">{{ item.product.name }}</p>
-                            <p>Price: £ {{ item.product.price|floatformat:2 }}</p>
-                            <p>Quantity: {{ item.quantity }}</p>
-                            <p>Shipping Fee: £{{ item.shipping|floatformat:2 }}</p>
-                            <p>Total Cost: £{{ item.total_cost|floatformat:2 }}</p>
+                    <div id="id{{ item.pk }}" class="border col-2 d-inline p-1 m-1">
+                        <div>
+                            <a class="text-dark" href="/products/{{ item.pk }}">
+                                <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">
+                                <p>{{ item.product.name }}</p>
+                                <p>£ {{ item.product.price|floatformat:2}}</p>
+                            </a>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}
@@ -31,33 +32,33 @@
         <p>Overal Total: £{{ grand_total | floatformat:2 }}</p>
         <hr>
     </div>
-    <div class="center-text">
+    <div>
         <h2><b>Personal Details</b></h2>
         <div>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset>
                     <legend>Your Details</legend>
-                    {{ order_form.full_name }}
-                    {{ order_form.email }}
-                    {{ order_form.phone_number }}
+                    {{ order_form.full_name }}<br><br>
+                    {{ order_form.email }}<br><br>
+                    {{ order_form.phone_number }}<br><br>
                 </fieldset>
                 <fieldset>
                     <legend>Your Address</legend>
-                    {{ order_form.country }}
-                    {{ order_form.county }}
-                    {{ order_form.town_r_city }}
-                    {{ order_form.street_add_line1 }}
-                    {{ order_form.street_add_line2 }}
-                    {{ order_form.postcode }}
+                    {{ order_form.country }}<br><br>
+                    {{ order_form.county }}<br><br>
+                    {{ order_form.town_r_city }}<br><br>
+                    {{ order_form.street_add_line1 }}<br><br>
+                    {{ order_form.street_add_line2 }}<br><br>
+                    {{ order_form.postcode }}<br><br>
                     <label for="save-order">Save Details:</label>
                     <input type="checkbox" id="save-order"></input>
                 </fieldset>
                 <fieldset>
                     <legend>Payments</legend>
                     <p>Please insert your card details for the transaction of £{{ grand_total|floatformat:2 }}</p>
-                    <div class="border m-auto w-500 p-10">
-                        <div id="card-element">
+                    <div class="row justify-content-md-center">
+                        <div id="card-element" class="w-50">
 
                         </div>
                         <div id="card-errors" role="alert">
@@ -69,7 +70,7 @@
                 <div>
                     {% if basket_contents %}
                         <hr>
-                        <button id="submit" type="submit" class="themed-button">Finalise Payment of £{{ grand_total | floatformat:2 }}</button>
+                        <button id="submit" type="submit" class="bg-dark text-white p-2 w-75">Finalise Payment of £{{ grand_total | floatformat:2 }}</button>
                     {% endif %}
                 </div>
             </form>
