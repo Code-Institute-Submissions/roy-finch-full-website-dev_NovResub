@@ -12,7 +12,7 @@
         <div class="row justify-content-md-center">
             {% if basket_contents %}
                 {% for item in basket_contents %}
-                    <div class="border col-2 d-inline p-1 m-1">
+                    <div class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
                         <div>
                             <a class="text-dark" href="/products/{{ item.pk }}">
                                 <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">

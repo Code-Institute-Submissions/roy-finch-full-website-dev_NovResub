@@ -1,6 +1,8 @@
 <div class="border fixed-bottom text-center rounded-top border-bottom-0 bg-white">
     <p class="text-success">Success</p>
     <p>{{ message }}</p>
-    <hr>
-    <p>Total (Exc. Shipping): £{{ total|floatformat:2 }}</p>
+    {% if grand_total != 0 %}
+        <hr>
+        <p>Total (Exc. Shipping): £{{ total|floatformat:2 }}</p>
+    {% endif %}
 </div>

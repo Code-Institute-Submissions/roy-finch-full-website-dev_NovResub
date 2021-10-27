@@ -7,18 +7,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-center">
         {% if basket_contents %}
             {% for item in basket_contents %}
-                <div id="id{{ item.pk }}" class="border col-2 d-inline p-1 m-1">
-                    <div style="height:65%;">
+                <div id="id{{ item.pk }}" class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
+                    <div class="align-top">
                         <a class="text-dark" href="/products/{{ item.pk }}">
                             <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">
                             <p>{{ item.product.name }}</p>
                             <p>£ {{ item.product.price|floatformat:2}}</p>
                         </a>
                     </div>
-                    <div class="50">
+                    <div class="align-bottom">
                         <form method="POST" action="">
                             {% csrf_token %}
                             <button name="add" value="{{ item.pk }}" type="submit" class="w-75 border bg-white text-dark p-2 mb-1">Add to Basket</button>

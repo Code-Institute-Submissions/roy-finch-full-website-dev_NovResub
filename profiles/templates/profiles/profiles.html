@@ -15,13 +15,20 @@
             {% csrf_token %}
             <fieldset>
                 <legend>Your Address</legend>
-                {{ form }}
+                Phone Number: <br>{{ form.default_phone_number }}<br>
+                Country: <br>{{ form.default_country }}<br>
+                County: <br>{{ form.default_county }}<br>
+                Town or City: <br>{{ form.default_town_r_city }}<br>
+                First Line of Your Address: <br>{{ form.default_street_add_line1 }}<br>
+                Second Line of Your Address: <br>{{ form.default_street_add_line2 }}<br>
+                Postal Code: <br>{{ form.default_postcode }}<br><br>
             </fieldset>
             <div class="center-text">
                 <a href="{% url 'basket' %}">
                     <button type="none" class="black-white themed-button">Save Settings</button>
                 </a>
             </div>
+            <br>
         </form>
     </div>
 </div>
