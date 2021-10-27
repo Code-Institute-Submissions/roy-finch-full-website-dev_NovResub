@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block page_header %}
-    <h2 class="center-text logo"><b>FIND A PRODUCT</b></h2>
-    <p class="center-text">Here you can add a product to the database.</p>
+    <h2><b>FIND A PRODUCT</b></h2>
+    <p>Here you can add a product to the database.</p>
 {% endblock %}
 
 {% block content%}
-        <div class="border m-10 p-10 m-b-10">
-            <div class="center-text">
+        <div class="border m-2 p-2">
+            <div>
                 <form method="GET" enctype="multipart/form-data">
                     <p>Select a product you would like to edit</p>
                     <input placeholder="What product would you like to edit?" class="border p-10 m-10 center w-250" name="select" list="products"/>
@@ -18,8 +18,9 @@
                             <option value="{{ item.name }}"></option>
                         {% endfor %}
                     </datalist>
+                    <br><br>
+                    <button id="submit" type="submit" class="bg-dark text-white">Find Product</button>
                     <br>
-                    <button id="submit" type="submit" class="themed-button">Find Product</button>
                 </form>
             </div>
         </div>

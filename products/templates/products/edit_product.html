@@ -7,19 +7,28 @@
 {% endblock %}
 
 {% block content%}
-    <div class="border m-10 p-10">
-        <div class="center-text">
-            <form class="center-text" method="POST" enctype="multipart/form-data">
+    <div class="border m-2 p-2">
+        <div>
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>Add details below about the new product you'd like tod add.</p>
                 <fieldset>
-                    {{ form }}
+                    Name: <br> {{ form.name }}<br>
+                    Sku: <br> {{ form.sku }}<br>
+                    Price: <br> {{ form.price }}<br>
+                    Console: <br> {{ form.console }}<br>
+                    Category: <br> {{ form.category }}<br>
+                    Description: <br> {{ form.description }}<br>
+                    Rating: <br> {{ form.rating }}<br>
+                    Image URL: <br> {{ form.image_url }}<br>
+                    Image: <br> {{ form.image }}
                 </fieldset>
                 <label for="delete">Delete Product:<br><span class="red">To delete this product, please say "DELETE" in the input field below</span></label>
                 <br>
-                <input class="red border m-10 p-10 w-250 center-text" type="input" id="delete" name="delete"></input>
-                <br>
-                <button id="submit" type="submit" class="m-10 themed-button">Update Product</button>
+                <input class="text-red border w-50" type="input" id="delete" name="delete"></input>
+                <br><br>
+                <button id="submit" type="submit" class="m-2 p-2 w-75 bg-dark text-white">Update Product</button>
+                <br><br>
             </form>
         </div>
     </div>

@@ -7,14 +7,22 @@
 {% endblock %}
 
 {% block content%}
-<div class="border m-5 p-5">
+<div class="border m-2 p-2">
     <div>
         <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
             <p>Add details below about the new product you'd like tod add.</p>
             <hr>
             {% csrf_token %}
             <fieldset>
-                {{ form }}
+                Name: <br> {{ form.name }}<br>
+                Sku: <br> {{ form.sku }}<br>
+                Price: <br> {{ form.price }}<br>
+                Console: <br> {{ form.console }}<br>
+                Category: <br> {{ form.category }}<br>
+                Description: <br> {{ form.description }}<br>
+                Rating: <br> {{ form.rating }}<br>
+                Image URL: <br> {{ form.image_url }}<br>
+                Image: <br> {{ form.image }}
             </fieldset>
             <br>
             <button id="submit" type="submit" class="bg-dark text-white">Add Product</button>
