@@ -33,6 +33,11 @@ def update_basket(request, add, product_pk):
     basket = request.session.get("basket", [])
     product = get_object_or_404(Product, pk=product_pk)
 
+    """ This is the function that deals with requests,
+    this takes which button was clicked and applies its
+    effect to the basket, this function is inside the basket
+    to make it easier to update and allow for one function
+    to update the basket """
     if add:
         messages.success(request, f'Added { product.name }')
         if find_product(basket, product_pk) is not False:
@@ -40,7 +45,8 @@ def update_basket(request, add, product_pk):
         else:
             basket.append({
                 "pk": product_pk,
-                "product": model_to_dict(product, exclude=["price", "rating", "image"]),
+                "product": model_to_dict(product, exclude=[
+                    "price", "rating", "image"]),
                 "quantity": 1,
             })
             basket[len(basket)-1]["product"]["price"] = float(product.price)

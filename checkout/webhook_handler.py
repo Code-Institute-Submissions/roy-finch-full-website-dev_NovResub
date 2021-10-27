@@ -12,7 +12,10 @@ import time
 
 
 class Stripe_WH_Handler:
-    """ This will deal with webhooks for stripe """
+    """ This will deal with webhooks for stripe. This is the handler
+    that is called upon to check if certain key features of the stripe
+    payment system have been successful in taking a payment, or if it fails
+    it returns the corrisponding input. """
 
     def __init__(self, request):
         self.request = request

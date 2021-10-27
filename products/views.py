@@ -25,6 +25,14 @@ def all_products(request):
     print(basket)
 
     if request.GET:
+        """ This is to control the search quieries
+        it checks if the search bar, id_search has been
+        altered if not then it goes through the three
+        filter ids to check if the filters have been altered.
+        They are the only thing that can trigger the get.
+        Each of them have a corrisponding char id for representation
+        within this. C- console, Q- category, F- formation, ect; alphabetic.
+        Alters the products array corrisponding user input """
         if "search" not in request.GET and (
                 "c" in request.GET) and (
                     "q" in request.GET) and (
@@ -86,6 +94,7 @@ def all_products(request):
 
     if request.POST:
         if "add" in request.POST:
+            """ The add request check is to update basket """
             check_request(request, request.POST["add"])
             return redirect("/products/#id"+request.POST["add"])
 
@@ -115,6 +124,8 @@ def product_detail(request, product_pk):
     basket = request.session.get("basket", [])
 
     if request.POST:
+        """ Same as the products view,
+        this checks if user has updated the basket """
         check_request(request, product_pk)
         redirect("products/"+str(product_pk))
 
@@ -163,6 +174,12 @@ def find_product(request):
 
     if "select" in request.GET:
         if request.GET["select"] == "New Product":
+            """ I wanted to simply the view
+            and make it so that the way products are
+            altered is easier,
+            you come to find_product view first and select
+            if you want to add a product or edit then go
+            to the corrisponding view. """
             return redirect(reverse("add_product"))
         else:
             product = get_object_or_404(Product, name=request.GET["select"])
@@ -189,6 +206,10 @@ def edit_product(request, product_pk):
     form = ProductForm(instance=product)
 
     if request.method == "POST":
+        """ The edit can also delete a product as the text
+        field with the id delete just needs a specific input to work.
+        You can also edit the product but you just update the product when done
+        """
         if "delete" in request.POST and request.POST["delete"] == "DELETE":
             product.delete()
             messages.success(request, "Product is deleted")

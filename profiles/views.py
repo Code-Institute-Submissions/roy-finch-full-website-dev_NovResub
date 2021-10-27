@@ -27,7 +27,6 @@ def profile(request):
         "profile": profile,
         "form": form,
         "orders": orders,
-        "check_display": False
     }
 
     return render(request, 'profiles/profiles.html', context)

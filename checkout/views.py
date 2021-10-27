@@ -21,6 +21,9 @@ def cache_checkout_data(request):
     """
     This function will cache any data about the checkout
     so that it can be accessed from other entries
+    It also adds data to the stripe payment intent that
+    is created to make sure that the payment is sufficent
+    and worked.
     """
     try:
         pid = request.POST.get("client_secret").split("_secret")[0]
@@ -32,7 +35,6 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        print(e)
         messages.error(request, "Sorry your payment cant be"
                                 " proccessed right now."
                                 " Please try again later.")
@@ -49,6 +51,10 @@ def checkout(request):
     basket = request.session.get("basket", [])
 
     if request.method == "POST":
+        """ This checks for the post in request.method, and updates
+        the information on the users profile and begins to
+        sort out the payment and other responsive functions
+        what are required to fire during this instance """
         form_data = {
             "full_name": request.POST["full_name"],
             "email": request.POST["email"],
@@ -125,8 +131,11 @@ def checkout(request):
             order_form = OrderForm()
 
     if not stripe_public_key or not stripe_secret_key:
+        """ This is a check to make sure that you have set the stripe keys """
         messages.warning(request, "Stripe key is not set.")
-
+    """ This gets an order form from the forms.py and
+    then sets the template, and context and renders the
+    information. """
     order_form = OrderForm()
     template = "checkout/checkout.html"
     context = {
@@ -147,7 +156,10 @@ def checkout_success(request, order_number):
     """
     save_order = request.session.get('save_order')
     order = get_object_or_404(Order, order_number=order_number)
-
+    """ This checks if the user wants to save their order
+    then gets their profile and adjusts it corrisponding
+    the users input and then begin to render
+    a success checkout page with information about the purchase. """
     profile = UserProfile.objects.get(user=request.user)
     order.user_profile = profile
     order.save()
