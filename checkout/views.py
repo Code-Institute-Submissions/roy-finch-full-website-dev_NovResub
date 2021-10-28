@@ -142,6 +142,7 @@ def checkout(request):
         "order_form": order_form,
         "stripe_public_key": stripe_public_key,
         "client_key": intent.client_secret,
+        "can_display": False
     }
 
     return render(request, template, context)

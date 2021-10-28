@@ -33,17 +33,21 @@
     </div>
     <br>
     <hr>
+    <p>Total: £{{ total | floatformat:2 }}</p>
+    <p>Shipping: £{{ shipping_total | floatformat:2 }}</p>
+    <p>Overal Total: £{{ grand_total | floatformat:2 }}</p>
+    <hr>
     <br>
     <div class="center-text">
         <div class="inline">
             <a href="{% url 'products' %}">
-                <button class="w-75 bg-dark text-white mb-2 p-2">Keep Shopping</button>
+                <button class="w-100 bg-dark text-white mb-2 p-2">Keep Shopping</button>
             </a>
         </div>
         <div class="inline">
             {% if basket_contents %}
                 <a href="{% url 'checkout' %}">
-                    <button class="w-75 bg-white text-dark p-2">Checkout</button>
+                    <button class="w-100 bg-white text-dark p-2">Checkout</button>
                 </a>
             {% endif %}
         </div>
