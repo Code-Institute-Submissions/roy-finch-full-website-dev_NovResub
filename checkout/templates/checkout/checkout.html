@@ -39,18 +39,18 @@
                 {% csrf_token %}
                 <fieldset>
                     <legend>Your Details</legend>
-                    {{ order_form.full_name }}<br><br>
-                    {{ order_form.email }}<br><br>
-                    {{ order_form.phone_number }}<br><br>
+                    {{ order_form.full_name }}
+                    {{ order_form.email }}
+                    {{ order_form.phone_number }}
                 </fieldset>
                 <fieldset>
                     <legend>Your Address</legend>
-                    {{ order_form.country }}<br><br>
-                    {{ order_form.county }}<br><br>
-                    {{ order_form.town_r_city }}<br><br>
-                    {{ order_form.street_add_line1 }}<br><br>
-                    {{ order_form.street_add_line2 }}<br><br>
-                    {{ order_form.postcode }}<br><br>
+                    {{ order_form.country }}
+                    {{ order_form.county }}
+                    {{ order_form.town_r_city }}
+                    {{ order_form.street_add_line1 }}
+                    {{ order_form.street_add_line2 }}
+                    {{ order_form.postcode }}
                     <label for="save-order">Save Details:</label>
                     <input type="checkbox" id="save-order"></input>
                 </fieldset>

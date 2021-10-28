@@ -11,14 +11,14 @@
             <div>
                 <form method="GET" enctype="multipart/form-data">
                     <p>Select a product you would like to edit</p>
-                    <input placeholder="What product would you like to edit?" class="border p-10 m-10 center w-250" name="select" list="products"/>
+                    <input placeholder="What product would you like to edit?" class="m-2 p-2 w-75" name="select" list="products"/>
                     <datalist id="products">
                         <option value="New Product"></option>
                         {% for item in products %}
                             <option value="{{ item.name }}"></option>
                         {% endfor %}
                     </datalist>
-                    <br><br>
+                    <br>
                     <button id="submit" type="submit" class="bg-dark text-white">Find Product</button>
                     <br>
                 </form>

@@ -14,15 +14,7 @@
             <hr>
             {% csrf_token %}
             <fieldset>
-                Name: <br> {{ form.name }}<br>
-                Sku: <br> {{ form.sku }}<br>
-                Price: <br> {{ form.price }}<br>
-                Console: <br> {{ form.console }}<br>
-                Category: <br> {{ form.category }}<br>
-                Description: <br> {{ form.description }}<br>
-                Rating: <br> {{ form.rating }}<br>
-                Image URL: <br> {{ form.image_url }}<br>
-                Image: <br> {{ form.image }}
+                {{ form }}
             </fieldset>
             <br>
             <button id="submit" type="submit" class="bg-dark text-white">Add Product</button>

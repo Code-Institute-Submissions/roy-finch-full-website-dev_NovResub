@@ -13,20 +13,11 @@
                 {% csrf_token %}
                 <p>Add details below about the new product you'd like tod add.</p>
                 <fieldset>
-                    Name: <br> {{ form.name }}<br>
-                    Sku: <br> {{ form.sku }}<br>
-                    Price: <br> {{ form.price }}<br>
-                    Console: <br> {{ form.console }}<br>
-                    Category: <br> {{ form.category }}<br>
-                    Description: <br> {{ form.description }}<br>
-                    Rating: <br> {{ form.rating }}<br>
-                    Image URL: <br> {{ form.image_url }}<br>
-                    Image: <br> {{ form.image }}
+                    {{ form }}
                 </fieldset>
                 <label for="delete">Delete Product:<br><span class="red">To delete this product, please say "DELETE" in the input field below</span></label>
                 <br>
-                <input class="text-red border w-50" type="input" id="delete" name="delete"></input>
-                <br><br>
+                <input class="text-red border w-50 m-2 p-2" type="input" id="delete" name="delete"></input>
                 <button id="submit" type="submit" class="m-2 p-2 w-75 bg-dark text-white">Update Product</button>
                 <br><br>
             </form>
