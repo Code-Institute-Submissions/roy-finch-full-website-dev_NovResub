@@ -5,30 +5,22 @@
     <div>
         <h2><b>THANK YOU</b></h2>
         <p>Thank you for shopping with Retro Exchange.</p>
-        <p>Your order number is <b>{{ order.order_number }}</b></p>
-        <div>
+        <p>Your order number is <b>{{ order.order_number }}.</b> This will be sent to the email that has been provided.</p>
+        <div class="row justify-content-md-center">
             {% for item in order.indiv_items.all %}
-                <div class="border col-2 d-inline p-1 m-1">
+                <div class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
                     <div>
-                        <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">
-                        <p>{{ item.product.name }}</p>
-                        <p>{{ item.quantity }} X £{{ item.product.price }} + 10% Shipping</p>
+                        <a class="text-dark" href="/products/{{ item.pk }}">
+                            <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">
+                            <p>{{ item.product.name }}</p>
+                            <p>£ {{ item.product.price|floatformat:2}}</p>
+                        </a>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div class="center-text border p-10 m-10">
-            <p>The order will be delivered to the address that has been given.</p>
-            <p>{{ order.full_name }}</p>
-            <p>{{ order.country }}</p>
-            <p>{{ order.county }}</p>
-            <p>{{ order.street_add_line1 }}</p>
-            <p>{{ order.street_add_line2 }}</p>
-            <p>{{ order.postcode }}</p>
-        </div>
-        <hr>
         <a href="{% url 'home' %}">
-            <button class="bg-dark text-white">Return to Homepage</button>
+            <button class="bg-dark text-white p-2 w-100 mt-5">Return to Homepage</button>
         </a>
     </div>
 {% endblock %}

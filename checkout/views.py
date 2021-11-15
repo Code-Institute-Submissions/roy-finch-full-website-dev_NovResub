@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 from django.contrib import messages
 from django.conf import settings
+from django.core.mail import send_mail
 
 import stripe
 
@@ -28,11 +29,7 @@ def cache_checkout_data(request):
     try:
         pid = request.POST.get("client_secret").split("_secret")[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
-            "basket": json.dumps(request.session["basket"]),
-            "save_order": request.POST.get("save_order"),
-            "username": request.user,
-        })
+        stripe.PaymentIntent.retrieve(pid)
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, "Sorry your payment cant be"
@@ -64,12 +61,12 @@ def checkout(request):
             "town_r_city": request.POST["town_r_city"],
             "street_add_line1": request.POST["street_add_line1"],
             "street_add_line2": request.POST["street_add_line2"],
-            "postcode": request.POST["postcode"],
+            "postcode": request.POST["postcode"]
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get("client_key").split("_secret")[0]
+            pid = request.POST.get("client_secret").split("_secret")[0]
             order.stripe_pid = pid
             order.original_basket = json.dumps(basket)
             order.save()
@@ -82,7 +79,7 @@ def checkout(request):
                             product=product,
                             quantity=basket[i]["quantity"],
                             indiv_item_total=(
-                                basket[i]["price"]*basket[i]["quantity"])
+                                basket[i]["product"]["price"]*basket[i]["quantity"])
                         )
                         indiv_items.save()
                 except Product.DoesNotExist:
@@ -109,7 +106,6 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
-            payment_method_types=["card"]
         )
 
         if request.user.is_authenticated:
@@ -142,7 +138,7 @@ def checkout(request):
     context = {
         "order_form": order_form,
         "stripe_public_key": stripe_public_key,
-        "client_key": intent.client_secret,
+        "client_secret": intent.client_secret,
         "can_display": False
     }
 
