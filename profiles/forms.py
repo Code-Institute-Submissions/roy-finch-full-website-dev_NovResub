@@ -29,4 +29,5 @@ class ProfileForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
             self.fields[field].widget.attrs["placeholder"] = placeholder
+            self.fields[field].widget.attrs["class"] = "w-75 mb-3 p-2"
             self.fields[field].label = False

@@ -21,4 +21,4 @@ class ProductForm(forms.ModelForm):
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
 
         for field in self.fields:
-            self.fields[field].widget.attrs["class"] = "w-100 mb-3"
+            self.fields[field].widget.attrs["class"] = "w-100 mb-3 p-2"

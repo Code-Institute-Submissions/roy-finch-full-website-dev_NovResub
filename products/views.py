@@ -22,7 +22,6 @@ def all_products(request):
     query = ["", "", ""]
 
     basket = request.session.get("basket", [])
-    print(basket)
 
     if request.GET:
         """ This is to control the search quieries
@@ -173,7 +172,8 @@ def find_product(request):
     list_products = Product.objects.all()
 
     if "select" in request.GET:
-        if request.GET["select"] == "New Product":
+        if (request.GET["select"] == "New Product" or
+                request.GET["select"] == ""):
             """ I wanted to simply the view
             and make it so that the way products are
             altered is easier,
@@ -182,8 +182,11 @@ def find_product(request):
             to the corrisponding view. """
             return redirect(reverse("add_product"))
         else:
-            product = get_object_or_404(Product, name=request.GET["select"])
-            return redirect(reverse("edit_product", args=[product.pk]))
+            try:
+                product = get_object_or_404(Product, name=request.GET["select"])
+                return redirect(reverse("edit_product", args=[product.pk]))
+            except:
+                return redirect(reverse("find_product", args=[product.pk]))
 
     template = "products/find_product.html"
 
