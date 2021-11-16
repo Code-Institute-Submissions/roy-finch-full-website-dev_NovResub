@@ -10,9 +10,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center">
+    <div class="row d-flex justify-content-center">
         {% for product in products %}
-            <div id="id{{ product.pk }}" class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
+            <div id="id{{ product.pk }}" class="border col-lg-3 col-md-4 col-xl-3 d-inline p-1 m-1">
                 <div>
                     <a class="text-dark text-decoration-none" href="{{ product.pk }}">
                         <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">

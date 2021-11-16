@@ -8,7 +8,7 @@
         <p>Your order number is <b>{{ order.order_number }}.</b> This will be sent to the email that has been provided.</p>
         <div class="row justify-content-md-center">
             {% for item in order.indiv_items.all %}
-                <div class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
+                <div class="border col-lg-3 col-md-4 col-xl-3 d-inline p-1 m-1">
                     <div>
                         <a class="text-dark" href="/products/{{ item.pk }}">
                             <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">

@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         {% if basket_contents %}
             {% for item in basket_contents %}
-                <div id="id{{ item.pk }}" class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
+                <div id="id{{ item.pk }}" class="border col-lg-3 col-md-4 col-xl-3 d-inline p-1 m-1">
                     <div class="align-top">
                         <a class="text-dark text-decoration-none" href="/products/{{ item.pk }}">
                             <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ item.product.image }}">
