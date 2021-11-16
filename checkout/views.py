@@ -158,8 +158,11 @@ def checkout_success(request, order_number):
     then gets their profile and adjusts it corrisponding
     the users input and then begin to render
     a success checkout page with information about the purchase. """
-    profile = UserProfile.objects.get(user=request.user)
-    order.user_profile = profile
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        order.user_profile = profile
+    else:
+        order.user_profile = order.email
     order.save()
 
     if save_order:
