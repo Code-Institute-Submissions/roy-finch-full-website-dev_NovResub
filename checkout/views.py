@@ -133,7 +133,7 @@ def checkout(request):
     """ This gets an order form from the forms.py and
     then sets the template, and context and renders the
     information. """
-    order_form = OrderForm()
+    
     template = "checkout/checkout.html"
     context = {
         "order_form": order_form,

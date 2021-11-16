@@ -13,30 +13,27 @@ Within this section, I will discuss what different users would require from my w
 
 ### First Time Users
 + Within a website, first time users would like to see a simple but effective web site layout and functionality.  We would like to be able to quickly and effectively understand website and have their needs met on the site.  
-+ Some users would need asimple navigation that will allow them to control searches on the site, other users would need a website that explains to the user what the site is about.  The website needs to allow users to shop on the side with the ability to filter searches to present the user with what they are looking for.  
++ Some users would need a simple navigation that will allow them to control searches on the site, other users would need a website that explains to the user what the site is about.  The website needs to allow users to shop on the side with the ability to filter searches to present the user with what they are looking for.  
 + Some users would like the ability to click on an image or product to see more detail or to see a larger image.
++ Not too many items that take up the visual space within the site as they are using the site so it is less of a visual annoyance to the user and doesn't effect their use of the site.
 
 ### Returning Users
 + Returning users would need a straightforward way to search for the product if they know what they're looking for.
 + Users would return to the site if you are able to provide competative prices and also be able to present the website in the style that they would like to see.
 
-### Users with Accounts and Regular 
+### Users with Accounts and Regular Use
 + Some users would like to easily login and out of account, whilst some people would like a simple and straightforward way of creating an account.
-+ Some users would like the ability to recieve emails about discounts or an ability to get discounts from purchases.
-+ Some users would like to alter how the website would look, and make sure that the website can keep the options that the user selects and be able to always return to the site with the selected settings. This could be done by saving it to an account as a sub section about settings and be present on the website by using the information inside of the data fields using JS.
++ Some users would like to recieve an email after a purchase so they can be able to make sure that the transaction has been completed correctly.
++ Some users would like to be able to checkout out with the ability for the profile stored information to be used to make the checkout easier. This would make it beneifitial for the user to create an account for the site if they want to keep track of previous orders and/or save data for the time being for future reference.
 
 ### Users with needs
-Users that have needs and requirements would need the ability to control the web site, this could be done by controlling the style, fonts or sizes of elements within the website.  I will think of a way of creating a footer on the website which can be used by the user to controll a series of aspects on the website.  These aspects could include alterations to the font, alterations to the images and the ability to turn off background images or colors.
-
-I think that the websites me navigation sure the accessible no matter where the user is on the website, and that the navigation bar should be easily understood, annotated and explained to the user so they can affectively search for website.
+I think that the websites navigation ensure the accessible no matter where the user is on the website, and that the navigation bar should be easily understood, annotated and explained to the user so they can affectively search for website.
 
 Some users would like to have easy access to their accounts and their personal information, whilst others would like to easily shop within my website and purchase without alot of hassil.  Some users would like to see offers for clearances of items that have been reduced.  I would like to create a home page that presents to the user a few list of products, like suggestions depending on accounts activity, what's new and possibly items that are reduced.
 
 Some users would like to be able to see whether an item has been added to the basket and would need a notification or indication of if the items in the basket. Some users would need to be shown that that action has been completed.
 
 Allow the users to be able to see and control the quantity of a product, although that in this instance I would only allow for the user to add one item at a time as this is about buying consoles and games which are retro and wouldn't necessarily be bought in bulk.
-
-
 
 The purpose of my site is to provide a service were a user or viewer can come to my site to purchase a form of goods.  Within this module the site must allow for user to be able to make an account, to add items to their basket's and to be able to search for and buy products.  The products I am thinking of using within the site are games as I am interested in games and old fashioned consoles.  I think that our website needs to be somewhat personal to the creator as they can connect with the idea and website closer and be able to truly build the image of the website and connect with what they want to see on the site.  As I am thinking of creating a website that allows for users to purchase games and consoles I have began to think about the name of the website.
 
@@ -95,6 +92,16 @@ I always like for the index page to contain information about the website. Origi
 
 No matter what styling I was going to apply I wanted the filters and apply button to have there own line if the views width became to small. I wanted this to be the case as the user can't choose the filters within a confind space so I made the filters seperate on smaller screens but stuck with the original layout for larger screens as that is orginally how I wanted the site to look.
 
+Using the user stories I have added the ability to create an account and within this a user can be able to access the order history and order details so next time that they use the checkout page they can be able to be given a form that has been completed using the details saved to the profile. This means that a user can create an account and have an easier time checkout within the app and be able to do purchases quicker. Also if they haven't updated the account details they can choose to save their information for a future time so they can make their next checking out quicker and more effective.
+
+Within my site I am dealing with products that have a large price and I would feel as though users would only need to purchase one of the products on the site, I have made it so that this is met, but if a user wanted to add several of the same product it would be a little more difficult as they can't add several to the basket with one action but they can use the add and remove buttons to easily effect and change the amount of an item they have within their basket.
+
+Within the layout of the website I have added a series of tags to annotate the navigation of the website so that the user can find what they want easier.
+
+I have made it so that most of the time you are able to view the products you can always click them and view their details page. Within the details page the image is sized to able to be viewed easier than some of the smaller images on the webpage so some users who need to view the images on a larger scale can do by clicking on the image.
+
+The navigation on the site is made to be be absolute instead of fixed so that the user has more space on the site and due to the basket taking up a portion of the viewers space on the site they will need to be able to see the site without too many items taking up the space that would be more benefitial to the user to use the site. I have added a series of buttons that do allow for a simple way of navigating the site at a click of a button to help the user be able to navigate the website more effectively. Also made it so that during development a user can add another button incase they want to add more products and create ways to navigate to those products.
+
 ## Deployment
 
 Within the instance of depolying the website, I had to restyle the website using bootstrap but was not able to alter the style of the generated forms, as they are harder to style.
@@ -151,9 +158,25 @@ I went through the website and checkout the html, css and js, against a validato
 
 I have also noticed an error with the admin find products page, and have added an if statement to catch fatal errors. What is happening is the admin can click on find product button and submit the form without choosing an item. But I had not set this up to work, so it would return an error. Now I have the views.py reading for the user to click new product or just press the button and now both inputs return a new add products form so that the admin user can update the website and add a new product.
 
+I have also added the css style to the admin page, which I realised that I had not added to the aws site. Once I have done this I have checked deployment on the heroku app the makesure that the css is being accessed correctly and the local gitpod server to check and both locations seem to be able to access the css style on the admin of the website.
+
 I have managed to fix the stripe payment api on the checkout system. I believe this is due to gitpod but I have noticed that the stripe.PaymentIntent.modify can not be done within the instance that I am doing it. This looks to be down to two possible issues. Either stripe deals with inputs through the urls and has a url for modifications and uploading data and a url for just checking the data. Then due to the way I am doing this I am trying to send the information to stripe and it keeps returning a failure as it may test the general url before testing the upload url.
 
-To fix this I have made it so that the cache_data url now just retrieves the information using the pid.
+To fix this I have made it so that the cache_data url now just retrieves the information using the pid. I have tested the codes that where given on stripe and it seems to have fixed the website as the user can only use the main 4242 code to pass the stripe payment system and the other stripe card codes return a comment about insufficient funds. So it looks like the payment system cannot be abused by a user that is being rathe mischievious with the payment of a product on the site.
+
+Within the profile and checkout form, the user can save information for later, so that checking out is easier next time they do it. Then when they return to the form at a later point if the user has an account then the form can be filled in with the provided information.
+
+If the user is an admin they can access a website where they can add a new item or update an existing on the website. This is a more interactive way for a user to be able to add a product to the website instead of having to use the admin page to be able to add the products they need to add. This can only be accessed if the user is a super user.
+
+Within the navigation of the website I have added a few span tags to edit the way the search functions are displayed and so that the users can understand what the individual search functions are and can be able to navigate the site using either the filters or the search bar.
+
+I have also created a style for a smaller device so that it can be accessed on different types of devices so if a user on a smaller device is able to use the site to be able to buy a product.
+
+The way on which the site is layed out is very fundimental and effective and allows for a simple way of navigation and also to be able to be used by the user to suit what they want on the site.
+
+I have had feedback from some of my close friends and moderators to be able to understand how to improve the website. One of the main things that people say about the site is that the navigation system is not effective. The reason I chose to create the navigation the way I have done it is so that the user can access products list depending on their input, I have checked other website that are similar to what my website is suppose to be and websites like Cex, have a very cramped and weird navigation, although their site is better at directing traffic to the paticular places of the site that a user may need. My navigation does what their navigation does but with less space impact. But using the feedback I have been given I have added a series of buttons that just show the corrisponding searches in case a user wants a quick access to the individual searches.
+
+Other feedback that I get is about how the site works and how people can navigate and do things within the site and other than the navigation the user can easily be able to do what they wanted to do when they come to the website.
 
 ## Bibliography
 [Code Institute](https://codeinstitute.net/) - This is the course material that was supplied to help me be able to understand django, and the modules that are within.
