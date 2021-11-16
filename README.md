@@ -147,6 +147,14 @@ The profile contains the information from the wireframe on the final product and
 
 Within the comparison of the wireframes and the final product, the website only has extensive changes to the base.html. The rest of the site contains the same amount of information and has a similar layout other than the products individual page which doesn't contain the rating and the save function.
 
+I went through the website and checkout the html, css and js, against a validator, there where a few issues at first. Originally buttons where used to create the style on the buttons on the website for the purpose of navigating the website, but the validator said that the use of a button being within an a tag is incorrect, so I had to change the button behaviour and remove the a tags. I added an onclick function to the buttons so that they begin to move the user to different locations on the website. Also I forgot to include an alternative text property to my images so the images where flagged by the validator and I have added this now so the validation has returned a pass on each of the url links.
+
+I have also noticed an error with the admin find products page, and have added an if statement to catch fatal errors. What is happening is the admin can click on find product button and submit the form without choosing an item. But I had not set this up to work, so it would return an error. Now I have the views.py reading for the user to click new product or just press the button and now both inputs return a new add products form so that the admin user can update the website and add a new product.
+
+I have managed to fix the stripe payment api on the checkout system. I believe this is due to gitpod but I have noticed that the stripe.PaymentIntent.modify can not be done within the instance that I am doing it. This looks to be down to two possible issues. Either stripe deals with inputs through the urls and has a url for modifications and uploading data and a url for just checking the data. Then due to the way I am doing this I am trying to send the information to stripe and it keeps returning a failure as it may test the general url before testing the upload url.
+
+To fix this I have made it so that the cache_data url now just retrieves the information using the pid.
+
 ## Bibliography
 [Code Institute](https://codeinstitute.net/) - This is the course material that was supplied to help me be able to understand django, and the modules that are within.
 
