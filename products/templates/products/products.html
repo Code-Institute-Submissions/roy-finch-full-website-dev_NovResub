@@ -15,28 +15,15 @@
             <div id="id{{ product.pk }}" class="border col-lg-3 col-md-4 col-xl-2 d-inline p-1 m-1">
                 <div>
                     <a class="text-dark" href="{{ product.pk }}">
-                        <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ product.image }}">
+                        <img class="m-2 w-75" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
                         <p>{{ product.name }}</p>
                         <p>£ {{ product.price|floatformat:2 }}</p>
-                        {% if product.rating > 1 %}
-                            <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png">
-                        {% endif %}
-                        {% if product.rating > 2 %}
-                            <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png">
-                        {% endif %}
-                        {% if product.rating > 3 %}
-                            <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png">
-                        {% endif %}
-                        {% if product.rating > 4 %}
-                            <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png">
-                        {% endif %}
-                        {% if product.rating == 5 %}
-                            <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png">
-                        {% endif %}
+                        <img style="width:25px;" src="{{ MEDIA_URL }}rating-icon.png" alt="Rating: ">
+                        <span>{{ product.rating }}</span>
                     </a>
                 </div>
                 <div class="align-bottom mt-2">
-                    <form method="POST" action="">
+                    <form method="POST" action="{% url 'products' %}">
                         {% csrf_token %}
                         <button name="add" value="{{ product.pk }}" type="submit" class="w-75 p-2 border-0 bg-dark text-light mb-5">Add to Basket</button>
                     </form>

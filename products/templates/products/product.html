@@ -9,27 +9,14 @@
     <div>
         <div class="justify-content-center">
             <div>
-                <img class="w-75" src="{{ MEDIA_URL }}{{ products.image }}">
+                <img class="w-75" src="{{ MEDIA_URL }}{{ products.image }}" alt="{{ product.name }}">
             </div>
             <p class="h-75">{{ products.description }}</p>
-            {% if products.rating > 1 %}
-                <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png">
-            {% endif %}
-            {% if products.rating > 2 %}
-                <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png">
-            {% endif %}
-            {% if products.rating > 3 %}
-                <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png">
-            {% endif %}
-            {% if products.rating > 4 %}
-                <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png">
-            {% endif %}
-            {% if products.rating == 5 %}
-                <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png">
-            {% endif %}
+            <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png" alt="Rating: ">
+            <span>{{ product.rating }}</span>
             <div class="p-5">
                 <p class="h4">£ {{ products.price }}</p>
-                <form method="POST" action="">
+                <form method="POST" action="{% url 'products' %}">
                     {% csrf_token %}
                     <button name="add" value="{{ products.pk }}" type="submit" class="w-50 bg-dark text-light p-2">Add to Basket</button>
                 </form>
