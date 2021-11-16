@@ -43,7 +43,7 @@
                 <div class="dropdown-container">
                     {% for item in order.indiv_items.all %}
                         <div class="border m-5 p-10 block w-250 h-600">
-                            <img class="s-icon" src="/media/{{ item.product.image }}">
+                            <img class="s-icon" src="{{ MEDIA_URL }}{{ item.product.image }}">
                             <p>{{ item.product.name }}</p>
                             <p>{{ item.quantity }} X £{{ item.product.price }}</p>
                         </div>
