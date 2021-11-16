@@ -39,14 +39,14 @@
     <hr>
     <br>
     <div class="center-text">
-        <div class="inline w-100 bg-dark text-white mb-2 p-2">
-            <a class="text-light" href="{% url 'products' %}">Keep Shopping</a>
+        <div>
+            <button class="inline w-100 bg-dark text-white mb-2 mt-2 p-2" onclick="location.href='/products'" >Keep Shopping</button>
         </div>
-        <div class="inline w-100 bg-white text-dark p-2 border">
-            {% if basket_contents %}
-                <a class="text-dark" href="{% url 'checkout' %}">Checkout</a>
-            {% endif %}
-        </div>
+        {% if basket_contents %}
+            <div>
+                <button class="inline w-100 bg-white text-dark mb-2 mt-2 p-2" onclick="location.href='/checkout'" >Checkout</button>
+            </div>
+        {% endif %}
     </div>
     <br>
     <hr>

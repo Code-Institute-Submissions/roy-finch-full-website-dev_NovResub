@@ -161,3 +161,5 @@ Within the comparison of the wireframes and the final product, the website only 
 [Heroku](https://dashboard.heroku.com/) - Live deployment service, which was used to deploy my website.
 
 [Stack Overflow](https://stackoverflow.com/) - For relatively simple discussion about Django and its elements to better understand the program.
+
+[Validator](https://validator.w3.org/) - For validating the HTML of the website during the final tests of the website.

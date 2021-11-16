@@ -8,10 +8,10 @@
 
 {% block content%}
 <div class="border m-10 p-10 m-b-10">
-    <div class="center-text">
+    <div class="justify-content-center">
         <p>YOUR DETAILS</p>
         <p>Here you can save some default settings just to make checkout easier for you later.</p>
-        <form action="{% url 'profile' %}" method="POST" id="profile-form">
+        <form class="justify-content-center" action="{% url 'profile' %}" method="POST" id="profile-form">
             {% csrf_token %}
             <fieldset>
                 <legend>Your Address</legend>
@@ -23,10 +23,8 @@
                 Second Line of Your Address: <br>{{ form.default_street_add_line2 }}<br>
                 Postal Code: <br>{{ form.default_postcode }}<br><br>
             </fieldset>
-            <div class="center-text">
-                <a href="{% url 'basket' %}">
-                    <button type="none" class="black-white themed-button">Save Settings</button>
-                </a>
+            <div>
+                <button class="inline w-75 bg-dark text-white mb-2 mt-2 p-2" type="submit" >Save Details</button>
             </div>
             <br>
         </form>
