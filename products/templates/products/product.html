@@ -13,7 +13,7 @@
             </div>
             <p class="h-75">{{ products.description }}</p>
             <img style="width:50px;" src="{{ MEDIA_URL }}rating-icon.png" alt="Rating: ">
-            <span>{{ product.rating }}</span>
+            <span>{{ products.rating }}</span>
             <div class="p-5">
                 <p class="h4">£ {{ products.price }}</p>
                 <form method="POST" action="{% url 'products' %}">
