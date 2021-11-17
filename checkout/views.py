@@ -163,19 +163,19 @@ def checkout_success(request, order_number):
         order.user_profile = profile
         order.save()
 
-    if save_order:
-        profile_data = {
-            "default_phone_number": order.phone_number,
-            "default_country": order.country,
-            "default_county": order.county,
-            "default_street_add_line1": order.street_add_line1,
-            "default_street_add_line2": order.street_add_line2,
-            "default_town_r_city": order.town_r_city,
-            "default_postcode": order.postcode
-        }
-        profile_form = ProfileForm(profile_data, instance=profile)
-        if profile_form.is_valid():
-            profile_form.save()
+        if save_order:
+            profile_data = {
+                "default_phone_number": order.phone_number,
+                "default_country": order.country,
+                "default_county": order.county,
+                "default_street_add_line1": order.street_add_line1,
+                "default_street_add_line2": order.street_add_line2,
+                "default_town_r_city": order.town_r_city,
+                "default_postcode": order.postcode
+            }
+            profile_form = ProfileForm(profile_data, instance=profile)
+            if profile_form.is_valid():
+                profile_form.save()
 
     if "basket" in request.session:
         del request.session["basket"]

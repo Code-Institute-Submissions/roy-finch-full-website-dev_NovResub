@@ -192,6 +192,8 @@ Originally I had a rather difficult time adding the stripe payment api to the we
 
 To fix this I have made it so that the cache_data url now just retrieves the information using the pid. I have tested the codes that where given on stripe and it seems to have fixed the website as the user can only use the main 4242 code to pass the stripe payment system and the other stripe card codes return a comment about insufficient funds. So it looks like the payment system cannot be abused by a user that is being rathe mischievious with the payment of a product on the site.
 
+Within the checking out system, I had an issue where the checkout wouldn't work for if the user has not got an account. I have managed to fix this by checking if the user has an account and then update the order with the users account information if applied. I hav also caught an error in the programming by making it so that the save order information also has the same catch to check if the user has an account or not.
+
 ## Reviewing Final Product
 
 Within revisiting the wireframes I realised that the data-layout of the products didn't really make sense if I didn't include the rating of the product on the actual page. As that would make that data redundant, so after seeing that I have added it onto the products page and the details page.
