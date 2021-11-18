@@ -32,32 +32,32 @@
             <div class="d-flex justify-content-end w-100">
                 {% if request.user.is_superuser %}
                     <a href="{% url 'find_product' %}" class="bg-white p-2 text-decoration-none">
-                        <img style="width:25px;" src="{{ MEDIA_URL }}search-icon.png" alt="Search">
+                        <img style="width:35px;" src="{{ MEDIA_URL }}search-icon.png" alt="Search">
                     </a>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'profile' %}" class="bg-white p-2 text-decoration-none">
-                        <img style="width:25px;" src="{{ MEDIA_URL }}profile-icon.png" alt="Profile">
+                        <img style="width:35px;" src="{{ MEDIA_URL }}profile-icon.png" alt="Profile">
                     </a>
                     <a href="{% url 'account_logout' %}" class="bg-white p-2 text-decoration-none">
-                        <img style="height:25px;" src="{{ MEDIA_URL }}signout-icon.png" alt="Signout">
+                        <img style="height:35px;" src="{{ MEDIA_URL }}signout-icon.png" alt="Signout">
                     </a>
                 {% else %}
                     <a href="{% url 'account_signup' %}" class="bg-white p-2 text-decoration-none">
-                        <img style="width:25px;" src="{{ MEDIA_URL }}signup-icon.png" alt="Signup">
+                        <img style="width:35px;" src="{{ MEDIA_URL }}signup-icon.png" alt="Signup">
                     </a>
                     <a href="{% url 'account_login' %}" class="bg-white p-2 text-decoration-none">
-                        <img style="width:25px;" src="{{ MEDIA_URL }}login-icon.png" alt="Login">
+                        <img style="width:35px;" src="{{ MEDIA_URL }}login-icon.png" alt="Login">
                     </a>
                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="row border-2 border p-1 justify-content-center">
-        <button class="inline border bg-white p-2 ml-1 mr-1" onclick="location.href='/'" >Home</button>
-        <button class="inline border bg-white p-2 ml-1 mr-1" onclick="location.href='/products/?c=NES&q=&f='" >NES</button>
-        <button class="inline border bg-white p-2 ml-1 mr-1" onclick="location.href='/products/?c=SNES&q=&f='" >SNES</button>
-        <button class="inline border bg-white p-2 ml-1 mr-1" onclick="location.href='/products/?c=Nintendo+64&q=&f='" >Nintendo 64</button>
+    <div class="row border-2 border p-1 justify-content-center h-100">
+        <button class="inline border bg-white p-3 ml-1 mr-1" onclick="location.href='/'" >Home</button>
+        <button class="inline border bg-white p-3 ml-1 mr-1" onclick="location.href='/products/?c=NES&q=&f='" >NES</button>
+        <button class="inline border bg-white p-3 ml-1 mr-1" onclick="location.href='/products/?c=SNES&q=&f='" >SNES</button>
+        <button class="inline border bg-white p-3 ml-1 mr-1" onclick="location.href='/products/?c=Nintendo+64&q=&f='" >Nintendo 64</button>
     </div>
     <div class="row justify-content-center bg-dark">
         <div class="col-10 text-center bg-dark">
@@ -126,7 +126,7 @@
         </div>
     {% endif %}
 
-    <div class="text-center ml-md-5 mr-md-5 ml-2 mr-2 p-5">
+    <div class="text-center ml-md-5 mr-md-5 ml-2 mr-2 p-3">
         {% block page_header %}
         {% endblock %}
         <hr>
@@ -140,7 +140,7 @@
     </div>
 
     {% if can_display == True %}
-        <div class="border fixed-bottom text-center rounded-top border-bottom-0 ml-2 ml-md-3 ml-lg-3 bg-white col-2">
+        <div class="border fixed-bottom text-center rounded-top border-bottom-0 ml-2 bg-white col-3 col-sm-3 col-md-2">
             <a class="text-dark text-decoration-none" href="{% url 'basket' %}">
                 <br>
                 <img class="w-75" src="{{ MEDIA_URL }}basket.png" alt="Basket">

@@ -173,6 +173,8 @@ I have also allowed for the user to be able to find produdcts on the website and
 
 I have also added the ability for a user to look on an account to find person information and also previous orders, so they can get any relevant information from those orders, or just view them on their accounts page.
 
+I have worked to create a good style that is addaptable to smaller devices and allows for users to be able to access the site no matter what device they may need. As I have tested this website, I feel as though the buttons on the sight are rather smaller and need to be made larger, also, I feel as though the new navigation buttons need to have a larger text size so they can be seen on medium devices. I have increased the padding of the buttons so they are easier to click, and also changed the way the product "cards" are displayed on small devices so that it can be decently sized and the basket can not effect the clickability. Whilst the user is on the products page, I have made sure that the basket div container doesn't overlap or effect the visual space and clickable space for the user to be able to use the site as intended. Also to improve the websites multi platform support I have increased the size of the account link icons to make it easier to access the users account. This now allows for a user to be able to use the website on different devices and not be unable to use the site.
+
 ## Deployment
 I began to deploy the site to heroku, disabled the collection of static files and hosted them on aws.amazons service and used a heroku database for some of the databases that are used on the site. As I began to do this I realised that the website began to become a little unstable.
 
