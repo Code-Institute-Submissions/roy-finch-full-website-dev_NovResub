@@ -196,6 +196,8 @@ To fix this I have made it so that the cache_data url now just retrieves the inf
 
 Within the checking out system, I had an issue where the checkout wouldn't work for if the user has not got an account. I have managed to fix this by checking if the user has an account and then update the order with the users account information if applied. I hav also caught an error in the programming by making it so that the save order information also has the same catch to check if the user has an account or not.
 
+To make it easier to develop within the future I have externalised the navbar, topbar and the search div. I feel as though making these files external will make it easier to edit and won't need to be effected on the base.html of the allauth too much.
+
 ## Reviewing Final Product
 
 Within revisiting the wireframes I realised that the data-layout of the products didn't really make sense if I didn't include the rating of the product on the actual page. As that would make that data redundant, so after seeing that I have added it onto the products page and the details page.
